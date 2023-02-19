@@ -1,5 +1,5 @@
+import ListGrid from './../../components/ListGrid';
 import Feature from '../../components/Feature';
-import Pricing from '../../components/Pricing';
 import Hero from '../../components/Hero';
 import Layout from '../../components/Layout/Layout';
 import SeoHead from '../../components/SeoHead';
@@ -11,6 +11,9 @@ export default function Home() {
       <Layout>
         <Hero />
         <Feature />
+        <div className='mx-auto max-w-screen-xl px-6 pt-5 xl:px-16'>
+          <ListGrid isHomePage={true} />
+        </div>
         {/* <Pricing /> */}
       </Layout>
     </>
