@@ -1,3 +1,4 @@
+import BlogPosts from './../../components/BlogPosts';
 import ListGrid from './../../components/ListGrid';
 import Feature from '../../components/Feature';
 import Hero from '../../components/Hero';
@@ -13,6 +14,10 @@ export default function Home() {
         <Feature />
         <div className='mx-auto max-w-screen-xl px-6 pt-5 xl:px-16'>
           <ListGrid isHomePage={true} />
+        </div>
+        <div id='blog'></div>
+        <div className='mx-auto max-w-screen-xl px-6 pt-5 xl:px-16'>
+          <BlogPosts isHomePage={true} />
         </div>
         {/* <Pricing /> */}
       </Layout>

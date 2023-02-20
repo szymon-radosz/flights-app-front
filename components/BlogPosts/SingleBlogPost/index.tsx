@@ -3,30 +3,29 @@ import Link from 'next/link';
 
 import ButtonOutline from './../../misc/ButtonOutline.';
 
-interface SingleListGridProps {
-  cityFrom: string;
-  cityTo: string;
+interface SingleBlogPostProps {
+  title: string;
+  date: string;
+  imgUrl: string;
+  url: string;
+  additionalTitleClass?: string;
 }
 
-const SingleListGrid = ({ cityFrom, cityTo }: SingleListGridProps) => {
-  const dateTwoWeeksOver = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000)
-    .toISOString()
-    .slice(0, 10);
-
-  const dateThreeWeeksOver = new Date(Date.now() + 21 * 24 * 60 * 60 * 1000)
-    .toISOString()
-    .slice(0, 10);
-
+const SingleBlogPost = ({
+  title,
+  date,
+  imgUrl,
+  url,
+  additionalTitleClass,
+}: SingleBlogPostProps) => {
   return (
-    <Link
-      href={`/kierunki/${cityFrom}/${cityTo}/${dateTwoWeeksOver}/${dateThreeWeeksOver}/1`}
-    >
+    <Link href={`/blog/${url}`}>
       <article className='bg-white rounded-xl py-3 shadow-lg duration-300 hover:scale-105 hover:transform hover:shadow-xl '>
         <a href='#'>
           <div className='relative flex items-end overflow-hidden rounded-t-xl'>
             <Image
-              src='/assets/london.png'
-              alt='Image by MidJourney'
+              src={imgUrl}
+              alt={title}
               layout='responsive'
               width={500}
               height={300}
@@ -35,13 +34,11 @@ const SingleListGrid = ({ cityFrom, cityTo }: SingleListGridProps) => {
           </div>
 
           <div className='mt-1 px-4 pt-4 pb-2.5'>
-            <h2 className='text-slate-700'>{`${cityFrom}-${cityTo}`}</h2>
+            <h2 className={`${additionalTitleClass}`}>{title}</h2>
             <div className='mt-3 flex items-end justify-between'>
               <div className='bg-blue-500 text-white hover:bg-blue-600 flex items-center rounded-lg py-1.5 duration-100'>
-                <Link
-                  href={`/kierunki/${cityFrom}/${cityTo}/${dateTwoWeeksOver}/${dateThreeWeeksOver}/1`}
-                >
-                  <ButtonOutline>Wyszukaj</ButtonOutline>
+                <Link href={`/blog/${url}`}>
+                  <ButtonOutline>Sprawdź</ButtonOutline>
                 </Link>
               </div>
             </div>
@@ -52,4 +49,4 @@ const SingleListGrid = ({ cityFrom, cityTo }: SingleListGridProps) => {
   );
 };
 
-export default SingleListGrid;
+export default SingleBlogPost;

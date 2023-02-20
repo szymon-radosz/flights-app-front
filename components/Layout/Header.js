@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 // Import react scroll
 import { Link as LinkScroll } from 'react-scroll';
+
 import ButtonOutline from '../misc/ButtonOutline.';
-import Image from 'next/image';
 
 const Header = () => {
   const [activeLink, setActiveLink] = useState(null);
@@ -28,7 +29,7 @@ const Header = () => {
                 src='/assets/ostatniBiletLogoGreen.png'
                 width={150}
                 height={150}
-                className={'h-20 w-20 rounded-full'}
+                className='h-20 w-20 rounded-full'
                 alt='Logo'
               />
             </Link>
@@ -69,6 +70,24 @@ const Header = () => {
               }
             >
               Korzyści
+            </LinkScroll>
+            <LinkScroll
+              activeClass='active'
+              to='blog'
+              spy={true}
+              smooth={true}
+              duration={1000}
+              onSetActive={() => {
+                setActiveLink('blog');
+              }}
+              className={
+                'animation-hover relative mx-2 inline-block cursor-pointer px-4 py-2' +
+                (activeLink === 'blog'
+                  ? ' animation-active text-green-500 '
+                  : ' text-black-500 hover:text-green-500 ')
+              }
+            >
+              Blog
             </LinkScroll>
           </ul>
           <div className='col-start-10 col-end-12 flex items-center justify-end font-medium'>
