@@ -34,7 +34,7 @@ const SingleBlogPost = ({
           </div>
 
           <div className='mt-1 px-4 pt-4 pb-2.5'>
-            <h2 className={`${additionalTitleClass}`}>{title}</h2>
+            <h2 className={`${additionalTitleClass} font-bold`}>{title}</h2>
             <div className='mt-3 flex items-end justify-between'>
               <div className='bg-blue-500 text-white hover:bg-blue-600 flex items-center rounded-lg py-1.5 duration-100'>
                 <Link href={`/blog/${url}`}>

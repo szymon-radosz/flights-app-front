@@ -13,7 +13,7 @@ export default function Directions() {
       <SeoHead title='404 | Nie znaleziono strony' />
       <Layout>
         <div className='mx-auto mt-20 max-w-screen-xl px-6 pt-20 xl:px-16'>
-          <div className='lg:align-center block sm:pt-10v sm:pb-10v md:pt-15v md:pb-15v lg:flex lg:justify-center'>
+          <div className='lg:align-center block sm:pt-10v sm:pb-10v md:pt-10v md:pb-10v lg:flex lg:justify-center'>
             <Image
               src='/assets/404.png'
               alt='404'

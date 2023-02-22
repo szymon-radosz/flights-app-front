@@ -30,10 +30,10 @@ const Feature = () => {
             className='ml-auto flex w-full flex-col items-end justify-center lg:w-9/12'
             variants={scrollAnimation}
           >
-            <h3 className='text-center  text-3xl font-medium leading-tight text-black-600 sm:text-left lg:text-4xl lg:leading-relaxed'>
+            <h3 className='w-full text-center text-3xl font-bold font-medium leading-tight text-black-600 sm:text-left lg:text-3xl lg:leading-relaxed'>
               Oszczędzaj na podróżach
             </h3>
-            <p className='my-6 pl-2 text-center text-black-500 sm:text-left'>
+            <p className='my-6 text-center text-black-500 sm:text-left'>
               Oszczędzaj dzięki naszym atrakcyjnym promocjom na bilety lotnicze.
               Dzięki funkcji alertów cenowych będziesz na bieżąco informowany o
               najnowszych promocjach i ofertach specjalnych. <br></br>

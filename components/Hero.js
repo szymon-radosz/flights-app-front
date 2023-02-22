@@ -1,10 +1,11 @@
-import React, { useMemo } from 'react';
-import Image from 'next/image';
-import ButtonPrimary from './misc/ButtonPrimary';
 import { motion } from 'framer-motion';
-import getScrollAnimation from '../utils/getScrollAnimation';
-import ScrollAnimationWrapper from './Layout/ScrollAnimationWrapper';
+import Image from 'next/image';
 import Link from 'next/link';
+import React, { useMemo } from 'react';
+
+import ScrollAnimationWrapper from './Layout/ScrollAnimationWrapper';
+import ButtonPrimary from './misc/ButtonPrimary';
+import getScrollAnimation from '../utils/getScrollAnimation';
 
 const Hero = ({
   listUser = [
@@ -35,7 +36,7 @@ const Hero = ({
           variants={scrollAnimation}
         >
           <div className=' row-start-2 flex flex-col items-start justify-center sm:row-start-1'>
-            <h1 className='ld:leading-normal max-w-none text-center text-3xl font-medium leading-tight text-black-600 sm:max-w-sm sm:text-left lg:text-3xl xl:text-4xl'>
+            <h1 className='ld:leading-normal  max-w-none text-center text-3xl font-bold font-medium leading-tight text-black-600 sm:max-w-sm sm:text-left lg:text-3xl xl:text-4xl'>
               Znajdź kierunek na swoją kolejną podróż
             </h1>
             <p className='mt-4  mb-6 max-w-none text-center  text-black-500 sm:max-w-sm sm:text-left'>
