@@ -27,8 +27,8 @@ const SearchBar = ({
   const [citiesTo, setCitiesTo] = useState([]);
 
   const [date, setDate] = useState({
-    startDate: new Date().toISOString().split('T')[0],
-    endDate: new Date().toISOString().split('T')[0],
+    startDate: new Date(+new Date() + 2678400000).toISOString().split('T')[0],
+    endDate: new Date(+new Date() + 3283200000).toISOString().split('T')[0],
   });
 
   const [cityFrom, setCityFrom] = useState('');
@@ -76,7 +76,9 @@ const SearchBar = ({
         .get(`${process?.env?.NEXT_PUBLIC_API_URL}cities/pl`)
         .then((response) => {
           if (response?.data) {
-            setCitiesFrom(response?.data);
+            setCitiesFrom(
+              response?.data?.filter((value: string) => value !== 'undefined')
+            );
           }
         })
         .catch((error) => {
@@ -96,7 +98,9 @@ const SearchBar = ({
       )
       .then((response) => {
         if (response?.data) {
-          setCitiesTo(response?.data);
+          setCitiesTo(
+            response?.data?.filter((value: string) => value !== 'undefined')
+          );
         }
       })
       .catch((error) => {

@@ -16,7 +16,7 @@ const Footer = () => {
               className='h-20 w-20 rounded-full'
               alt='Logo'
             />
-            <p className='mb-4 mt-6 ml-3'>
+            <p className='mb-4 mt-6 ml-3 font-bold'>
               Znajdź kierunek na <br></br>swoją kolejną podróż
             </p>
           </div>

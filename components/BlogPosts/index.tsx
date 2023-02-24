@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import React, { useMemo, useState } from 'react';
 
+import ScrollAnimationWrapper from './../Layout/ScrollAnimationWrapper';
 import SingleBlogPost from './SingleBlogPost';
+import getScrollAnimation from '../../utils/getScrollAnimation';
+
 interface Props {
   isHomePage?: boolean;
 }
 
 const BlogPosts = ({ isHomePage }: Props) => {
+  const scrollAnimation = useMemo(() => getScrollAnimation(), []);
+
   const [list, setList] = useState([
     {
       id: 1,
@@ -40,26 +46,53 @@ const BlogPosts = ({ isHomePage }: Props) => {
   ]);
 
   return (
-    <section className='pt-4 pb-10 lg:mb-5 lg:pt-5'>
-      <h3 className='font-bold uppercase text-black-500'>Blog</h3>
-      <h2 className='text-2xl font-bold font-medium leading-normal text-black-600 lg:text-3xl xl:text-3xl'>
-        Co w trawie piszczy
-      </h2>
-      <div className='mx-auto grid max-w-6xl  grid-cols-1 gap-6 pt-3 pb-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {list?.map((singleListItem, i) => {
-          return (
-            <SingleBlogPost
-              title={singleListItem?.title}
-              date={singleListItem?.date}
-              imgUrl={singleListItem?.imgUrl}
-              url={singleListItem?.url}
-              additionalTitleClass={singleListItem?.additionalTitleClass}
-              key={i}
-            />
-          );
-        })}
-      </div>
-    </section>
+    <>
+      {isHomePage ? (
+        <ScrollAnimationWrapper className='pb-10 sm:pt-5 sm:pb-10'>
+          <motion.div variants={scrollAnimation}>
+            <h3 className='font-bold uppercase text-black-500'>Blog</h3>
+            <h2 className='text-2xl font-bold font-medium leading-normal text-black-600 lg:text-3xl xl:text-3xl'>
+              Co w trawie piszczy
+            </h2>
+            <div className='mx-auto grid max-w-6xl  grid-cols-1 gap-6 pt-3 pb-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+              {list?.map((singleListItem, i) => {
+                return (
+                  <SingleBlogPost
+                    title={singleListItem?.title}
+                    date={singleListItem?.date}
+                    imgUrl={singleListItem?.imgUrl}
+                    url={singleListItem?.url}
+                    additionalTitleClass={singleListItem?.additionalTitleClass}
+                    key={i}
+                  />
+                );
+              })}
+            </div>
+          </motion.div>
+        </ScrollAnimationWrapper>
+      ) : (
+        <section className='pt-4 pb-10 lg:mb-5 lg:pt-5'>
+          <h3 className='font-bold uppercase text-black-500'>Blog</h3>
+          <h2 className='text-2xl font-bold font-medium leading-normal text-black-600 lg:text-3xl xl:text-3xl'>
+            Co w trawie piszczy
+          </h2>
+          <div className='mx-auto grid max-w-6xl  grid-cols-1 gap-6 pt-3 pb-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+            {list?.map((singleListItem, i) => {
+              return (
+                <SingleBlogPost
+                  title={singleListItem?.title}
+                  date={singleListItem?.date}
+                  imgUrl={singleListItem?.imgUrl}
+                  url={singleListItem?.url}
+                  additionalTitleClass={singleListItem?.additionalTitleClass}
+                  key={i}
+                />
+              );
+            })}
+          </div>
+        </section>
+      )}
+    </>
   );
 };
 
