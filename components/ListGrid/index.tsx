@@ -1,7 +1,5 @@
-import { motion } from 'framer-motion';
 import React, { useMemo, useState } from 'react';
 
-import ScrollAnimationWrapper from './../Layout/ScrollAnimationWrapper';
 import SingleListGrid from './SingleListGrid';
 import getScrollAnimation from '../../utils/getScrollAnimation';
 
@@ -118,53 +116,75 @@ const ListGrid = ({ isHomePage }: Props) => {
   );
 
   return (
-    <>
-      {isHomePage ? (
-        <ScrollAnimationWrapper className='pt-5 pb-10 sm:pt-5 sm:pb-10'>
-          <motion.div variants={scrollAnimation}>
-            <h3 className='font-bold uppercase text-black-500'>Top kierunki</h3>
-            <h2 className='text-2xl font-bold font-medium leading-normal text-black-600 lg:text-3xl xl:text-3xl'>
-              Popularne kierunki
-            </h2>
-            <div className='mx-auto grid max-w-6xl  grid-cols-1 gap-6 pt-3 pb-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-              {list?.map((singleListItem, i) => {
-                return (
-                  <SingleListGrid
-                    cityTo={singleListItem?.cityTo}
-                    cityFrom={singleListItem?.cityFrom}
-                    img={singleListItem?.img}
-                    key={i}
-                  />
-                );
-              })}
-            </div>
-          </motion.div>
-        </ScrollAnimationWrapper>
-      ) : (
-        <section className='pt-4 pb-10 lg:pt-10'>
-          {/* <ScrollAnimationWrapper className='py-10'>
-      <motion.div variants={scrollAnimation}> */}
-          <h3 className='font-bold uppercase text-black-500'>Top kierunki</h3>
-          <h2 className='text-2xl font-bold font-medium leading-normal text-black-600 lg:text-3xl xl:text-3xl'>
-            Popularne kierunki
-          </h2>
-          <div className='mx-auto grid max-w-6xl  grid-cols-1 gap-6 pt-3 pb-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-            {list?.map((singleListItem, i) => {
-              return (
-                <SingleListGrid
-                  cityTo={singleListItem?.cityTo}
-                  cityFrom={singleListItem?.cityFrom}
-                  img={singleListItem?.img}
-                  key={i}
-                />
-              );
-            })}
-          </div>
-          {/* </motion.div>
-    </ScrollAnimationWrapper> */}
-        </section>
-      )}
-    </>
+    // <>
+    //   {isHomePage ? (
+    //     <ScrollAnimationWrapper className='pt-5 pb-10 sm:pt-5 sm:pb-10'>
+    //       <motion.div variants={scrollAnimation}>
+    //         <h3 className='font-bold uppercase text-black-500'>Top kierunki</h3>
+    //         <h2 className='text-2xl font-bold font-medium leading-normal text-black-600 lg:text-3xl xl:text-3xl'>
+    //           Popularne kierunki
+    //         </h2>
+    //         <div className='mx-auto grid max-w-6xl  grid-cols-1 gap-6 pt-3 pb-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+    //           {list?.map((singleListItem, i) => {
+    //             return (
+    //               <SingleListGrid
+    //                 cityTo={singleListItem?.cityTo}
+    //                 cityFrom={singleListItem?.cityFrom}
+    //                 img={singleListItem?.img}
+    //                 key={i}
+    //               />
+    //             );
+    //           })}
+    //         </div>
+    //       </motion.div>
+    //     </ScrollAnimationWrapper>
+    //   ) : (
+    //     <section className='pt-4 pb-10 lg:pt-10'>
+    //       {/* <ScrollAnimationWrapper className='py-10'>
+    //   <motion.div variants={scrollAnimation}> */}
+    //       <h3 className='font-bold uppercase text-black-500'>Top kierunki</h3>
+    //       <h2 className='text-2xl font-bold font-medium leading-normal text-black-600 lg:text-3xl xl:text-3xl'>
+    //         Popularne kierunki
+    //       </h2>
+    //       <div className='mx-auto grid max-w-6xl  grid-cols-1 gap-6 pt-3 pb-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+    //         {list?.map((singleListItem, i) => {
+    //           return (
+    //             <SingleListGrid
+    //               cityTo={singleListItem?.cityTo}
+    //               cityFrom={singleListItem?.cityFrom}
+    //               img={singleListItem?.img}
+    //               key={i}
+    //             />
+    //           );
+    //         })}
+    //       </div>
+    //       {/* </motion.div>
+    // </ScrollAnimationWrapper> */}
+    //     </section>
+    //   )}
+    // </>
+    <section className='pt-4 pb-10 lg:pt-10'>
+      {/* <ScrollAnimationWrapper className='py-10'>
+    <motion.div variants={scrollAnimation}> */}
+      <h3 className='font-bold uppercase text-black-500'>Top kierunki</h3>
+      <h2 className='text-2xl font-bold font-medium leading-normal text-black-600 lg:text-3xl xl:text-3xl'>
+        Popularne kierunki
+      </h2>
+      <div className='mx-auto grid max-w-6xl  grid-cols-1 gap-6 pt-3 pb-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+        {list?.map((singleListItem, i) => {
+          return (
+            <SingleListGrid
+              cityTo={singleListItem?.cityTo}
+              cityFrom={singleListItem?.cityFrom}
+              img={singleListItem?.img}
+              key={i}
+            />
+          );
+        })}
+      </div>
+      {/* </motion.div>
+      </ScrollAnimationWrapper> */}
+    </section>
   );
 };
 
