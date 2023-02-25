@@ -1,14 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  redirects: async () => [
-    {
-      source: '/:path*',
-      has: [{ type: 'host', value: 'www.ostatnibilet.pl' }],
-      destination: 'https://ostatnibilet.pl/:path*',
-      permanent: true,
-    },
-  ],
-
   eslint: {
     dirs: ['src'],
   },
