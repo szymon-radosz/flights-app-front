@@ -1,12 +1,24 @@
+import Image from 'next/image';
+
 import Layout from '../../../../components/Layout/Layout';
 import SeoHead from '../../../../components/SeoHead';
 
 export default function Article4() {
+  const title = 'Blog | Oszczędzanie pieniędzy podczas podróży';
+
   return (
     <>
-      <SeoHead title='Blog | Oszczędzanie pieniędzy podczas podróży' />
+      <SeoHead title={title} />
       <Layout>
         <div className='mx-auto mt-20 max-w-screen-xl px-6 pt-20 xl:px-16'>
+          <Image
+            src='/assets/article4.png'
+            alt={title}
+            width={500}
+            height={300}
+            quality={100}
+            className='mb-6 sm:float-left sm:mb-3 sm:max-w-xs sm:pr-3 lg:max-w-sm'
+          />
           <p className='mb-5'>
             <strong>Oszczędzanie pieniędzy podczas podróży</strong> do nowego
             miasta może być wyzwaniem, zwłaszcza jeśli masz napięty budżet.

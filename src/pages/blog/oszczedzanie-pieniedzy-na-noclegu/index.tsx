@@ -1,12 +1,24 @@
+import Image from 'next/image';
+
 import Layout from '../../../../components/Layout/Layout';
 import SeoHead from '../../../../components/SeoHead';
 
 export default function Article2() {
+  const title = 'Blog | Oszczędzanie pieniędzy na noclegu';
+
   return (
     <>
       <SeoHead title='Blog | Oszczędzanie pieniędzy na noclegu' />
       <Layout>
         <div className='mx-auto mt-20 max-w-screen-xl px-6 pt-20 xl:px-16'>
+          <Image
+            src='/assets/article2.png'
+            alt={title}
+            width={500}
+            height={300}
+            quality={100}
+            className='mb-6 sm:float-left sm:mb-3 sm:max-w-xs sm:pr-3 lg:max-w-sm'
+          />
           <p className='mb-5'>
             <strong>Oszczędzanie pieniędzy na noclegu</strong> podczas podróży
             może być wyzwaniem, ale istnieje kilka strategii, których możesz
