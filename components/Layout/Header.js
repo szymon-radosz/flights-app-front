@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-// Import react scroll
-import { Link as LinkScroll } from 'react-scroll';
 
+// Import react scroll
 import ButtonOutline from '../misc/ButtonOutline.';
 
 const Header = () => {
@@ -14,6 +13,19 @@ const Header = () => {
       setScrollActive(window.scrollY > 20);
     });
   }, []);
+
+  const handleSetActiveLinkAbout = () => {
+    setActiveLink('about');
+  };
+
+  const handleSetActiveLinkFeature = () => {
+    setActiveLink('feature');
+  };
+
+  const handleSetActiveLinkBlog = () => {
+    setActiveLink('blog');
+  };
+
   return (
     <>
       <header
@@ -35,15 +47,10 @@ const Header = () => {
             </Link>
           </div>
           <ul className='col-start-4 col-end-8 hidden items-center text-black-500  lg:flex'>
-            <LinkScroll
-              activeClass='active'
-              to='about'
-              spy={true}
-              smooth={true}
-              duration={1000}
-              onSetActive={() => {
-                setActiveLink('about');
-              }}
+            <Link
+              href='/#about'
+              scroll={false}
+              onClick={handleSetActiveLinkAbout}
               className={
                 'animation-hover relative mx-2 inline-block cursor-pointer px-4 py-2' +
                 (activeLink === 'about'
@@ -52,16 +59,11 @@ const Header = () => {
               }
             >
               Strona Główna
-            </LinkScroll>
-            <LinkScroll
-              activeClass='active'
-              to='feature'
-              spy={true}
-              smooth={true}
-              duration={1000}
-              onSetActive={() => {
-                setActiveLink('feature');
-              }}
+            </Link>
+            <Link
+              href='/#feature'
+              scroll={false}
+              onClick={handleSetActiveLinkFeature}
               className={
                 'animation-hover relative mx-2 inline-block cursor-pointer px-4 py-2' +
                 (activeLink === 'feature'
@@ -70,16 +72,11 @@ const Header = () => {
               }
             >
               Korzyści
-            </LinkScroll>
-            <LinkScroll
-              activeClass='active'
-              to='blog'
-              spy={true}
-              smooth={true}
-              duration={1000}
-              onSetActive={() => {
-                setActiveLink('blog');
-              }}
+            </Link>
+            <Link
+              href='/#blog'
+              scroll={false}
+              onClick={handleSetActiveLinkBlog}
               className={
                 'animation-hover relative mx-2 inline-block cursor-pointer px-4 py-2' +
                 (activeLink === 'blog'
@@ -88,7 +85,7 @@ const Header = () => {
               }
             >
               Blog
-            </LinkScroll>
+            </Link>
           </ul>
           <div className='col-start-10 col-end-12 flex items-center justify-end font-medium'>
             <Link href='/kierunki'>
