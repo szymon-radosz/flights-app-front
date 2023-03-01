@@ -131,7 +131,7 @@ const SearchBar = ({
   ) => {
     if (isListView && cityFrom && cityTo && date) {
       return Router.push(
-        `kierunki/${cityFrom}/${cityTo}/${date?.startDate}/${date?.endDate}/${initialPeopleCount}`
+        `kierunki/${cityFrom}/${cityTo}/${date?.startDate}/${date?.endDate}/${peopleCount}`
       );
     } else if (
       (cityFrom && cityTo && date) ||
