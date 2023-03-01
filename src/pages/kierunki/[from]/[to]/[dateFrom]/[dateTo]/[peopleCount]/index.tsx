@@ -1,16 +1,17 @@
-import { useState } from 'react';
 import { useRouter } from 'next/router';
-import Layout from '../../../../../../../../components/Layout/Layout';
-import SeoHead from '../../../../../../../../components/SeoHead';
-import SearchBar from '../../../../../../../../components/SearchBar';
+import { useState } from 'react';
+
 import Flights from '../../../../../../../../components/Flights';
+import Layout from '../../../../../../../../components/Layout/Layout';
+import SearchBar from '../../../../../../../../components/SearchBar';
+import SeoHead from '../../../../../../../../components/SeoHead';
 
 interface QueryProps {
   from?: string;
   to?: string;
   dateFrom?: string;
   dateTo?: string;
-  peopleCount?: string | number;
+  peopleCount?: number;
 }
 
 export default function DirectionsSearchPage() {
@@ -30,6 +31,7 @@ export default function DirectionsSearchPage() {
             initialDateTo={dateTo}
             initialDirectionFrom={from}
             initialDirectionTo={to}
+            initialPeopleCount={peopleCount}
           />
         </div>
         {/* <h1>

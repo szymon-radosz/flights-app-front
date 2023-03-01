@@ -12,6 +12,7 @@ interface SearchBarProps {
   initialDateTo?: string;
   initialDirectionFrom?: string;
   initialDirectionTo?: string;
+  initialPeopleCount?: number;
 }
 
 const SearchBar = ({
@@ -21,9 +22,9 @@ const SearchBar = ({
   initialDateTo,
   initialDirectionFrom,
   initialDirectionTo,
+  initialPeopleCount,
 }: SearchBarProps) => {
   const [citiesFrom, setCitiesFrom] = useState([]);
-
   const [citiesTo, setCitiesTo] = useState([]);
 
   const [date, setDate] = useState({
@@ -34,6 +35,8 @@ const SearchBar = ({
   const [cityFrom, setCityFrom] = useState('');
   const [cityTo, setCityTo] = useState('');
 
+  const [peopleCount, setPeopleCount] = useState(1);
+
   useEffect(() => {
     getPlCities();
   }, []);
@@ -43,7 +46,8 @@ const SearchBar = ({
       initialDateFrom &&
       initialDateTo &&
       initialDirectionFrom &&
-      initialDirectionTo
+      initialDirectionTo &&
+      initialPeopleCount
     ) {
       getCitiesAbroad(initialDirectionFrom);
       setDate({
@@ -52,11 +56,13 @@ const SearchBar = ({
       });
       setCityFrom(initialDirectionFrom);
       setCityTo(initialDirectionTo);
+      setPeopleCount(initialPeopleCount);
       handleSubmit(
         initialDateFrom,
         initialDateTo,
         initialDirectionFrom,
-        initialDirectionTo
+        initialDirectionTo,
+        initialPeopleCount
       );
     }
   }, [
@@ -64,6 +70,7 @@ const SearchBar = ({
     initialDateTo,
     initialDirectionFrom,
     initialDirectionTo,
+    initialPeopleCount,
   ]);
 
   const handleDateChange = (newValue: any) => {
@@ -119,11 +126,12 @@ const SearchBar = ({
     initialDateFrom?: string,
     initialDateTo?: string,
     initialDirectionFrom?: string,
-    initialDirectionTo?: string
+    initialDirectionTo?: string,
+    initialPeopleCount?: number
   ) => {
     if (isListView && cityFrom && cityTo && date) {
       return Router.push(
-        `kierunki/${cityFrom}/${cityTo}/${date?.startDate}/${date?.endDate}/1`
+        `kierunki/${cityFrom}/${cityTo}/${date?.startDate}/${date?.endDate}/${initialPeopleCount}`
       );
     } else if (
       (cityFrom && cityTo && date) ||
@@ -264,7 +272,7 @@ const SearchBar = ({
           </div>
         </div>
       </div>
-      <div className='input-field second-wrap mr-0 mr-0 mb-3 w-full  sm:mr-2 sm:w-2/5'>
+      <div className='input-field second-wrap mr-0 mr-0 mb-3 w-full  sm:mr-1 sm:w-2/5'>
         <div className='mb-1 flex items-center'>
           <div className='icon-wrap '>
             <svg
@@ -298,6 +306,42 @@ const SearchBar = ({
               },
             ]}
           />
+        </div>
+      </div>
+
+      <div className='input-field first-wrap mb-3 mr-0 mr-0 w-full sm:mr-2 sm:w-1/5'>
+        <div className='mb-1 flex items-center'>
+          <div className='icon-wrap '>
+            <img src='/assets/people.png' width='18' height='18' />
+          </div>
+          <p className='pl-1 text-sm font-bold leading-normal text-black-600'>
+            Ilość osób
+          </p>
+        </div>
+        <div
+          className='choices'
+          role='listbox'
+          data-type='select-one'
+          tabIndex={0}
+          aria-haspopup='true'
+          aria-expanded='false'
+          dir='ltr'
+          aria-activedescendant='choices-choices-single-defaul-rg-item-choice-1'
+        >
+          <div className='choices__inner'>
+            <select
+              id='to'
+              className='bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 block w-full rounded-lg border p-2.5 text-sm dark:placeholder-gray-400'
+              onChange={(e) => setPeopleCount(Number(e?.target?.value))}
+            >
+              <option selected={true}>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+            </select>
+          </div>
         </div>
       </div>
 
