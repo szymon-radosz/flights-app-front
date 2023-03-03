@@ -1,10 +1,10 @@
+import Accomodation from 'components/Accomodation';
+import Flights from 'components/Flights';
+import Layout from 'components/Layout/Layout';
+import SearchBar from 'components/SearchBar';
+import SeoHead from 'components/SeoHead';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-
-import Flights from '../../../../../../../../components/Flights';
-import Layout from '../../../../../../../../components/Layout/Layout';
-import SearchBar from '../../../../../../../../components/SearchBar';
-import SeoHead from '../../../../../../../../components/SeoHead';
 
 interface QueryProps {
   from?: string;
@@ -39,6 +39,12 @@ export default function DirectionsSearchPage() {
         </h1> */}
         <div className='mx-auto max-w-screen-xl px-8 xl:px-16'>
           <Flights foundFlights={foundFlights} />
+          <Accomodation
+            directionTo={to}
+            dateFrom={from}
+            dateTo={to}
+            peopleCount={peopleCount}
+          />
         </div>
       </Layout>
     </>

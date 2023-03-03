@@ -1,7 +1,6 @@
-import ButtonOutline from './../../misc/ButtonOutline.';
-import Link from 'next/link';
 import Image from 'next/image';
-import Skeleton from './../../Skeleton';
+
+import ButtonOutline from './../../misc/ButtonOutline.';
 interface SingleListGridProps {
   logo: string;
   date: string;
@@ -27,11 +26,11 @@ const SingleFlight = ({
               src={logo}
               width={100}
               height={100}
-              className={'shadow-soft-2xl rounded-xl'}
+              className='shadow-soft-2xl h-[70px] w-[70px] rounded-xl sm:h-[100px] sm:w-[100px] '
               alt='Logo'
             />
           </div>
-          <div className='flex flex-col items-start justify-center'>
+          <div className='flex w-[135px] flex-col items-start justify-center sm:w-[300px]'>
             <h6 className=' text-m  mb-1 font-medium leading-tight text-black-600 sm:mb-0 '>
               {route}
             </h6>
