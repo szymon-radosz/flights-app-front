@@ -78,9 +78,6 @@ export default function DirectionsSearchPage() {
             initialPeopleCount={peopleCount}
           />
         </div>
-        {/* <h1>
-          Szukaj {from}, {to}, {dateFrom}, {dateTo}, {peopleCount}
-        </h1> */}
         <div className='mx-auto max-w-screen-xl px-8 xl:px-16'>
           <Flights foundFlights={foundFlights} />
           <Accomodation
