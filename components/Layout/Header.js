@@ -1,11 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 // Import react scroll
 import ButtonOutline from '../misc/ButtonOutline.';
+import analytics from '../../firebase';
 
 const Header = () => {
+  const { asPath } = useRouter();
   const [activeLink, setActiveLink] = useState(null);
   const [scrollActive, setScrollActive] = useState(false);
   useEffect(() => {
@@ -16,14 +19,45 @@ const Header = () => {
 
   const handleSetActiveLinkAbout = () => {
     setActiveLink('about');
+    analytics()?.logEvent('click_element', {
+      location: 'Header',
+      name: 'Home Option',
+      activeUrl: window?.location?.pathname,
+    });
   };
 
   const handleSetActiveLinkFeature = () => {
     setActiveLink('feature');
+    analytics()?.logEvent('click_element', {
+      location: 'Header',
+      name: 'Benefits Option',
+      activeUrl: window?.location?.pathname,
+    });
   };
 
   const handleSetActiveLinkBlog = () => {
     setActiveLink('blog');
+    analytics()?.logEvent('click_element', {
+      location: 'Header',
+      name: 'Blog Option',
+      activeUrl: window?.location?.pathname,
+    });
+  };
+
+  const handleLogoClick = () => {
+    analytics()?.logEvent('click_element', {
+      location: 'Header',
+      name: 'Logo',
+      activeUrl: window?.location?.pathname,
+    });
+  };
+
+  const handleDirectionsOptionClick = () => {
+    analytics()?.logEvent('click_element', {
+      location: 'Header',
+      name: 'Directions Option',
+      activeUrl: window?.location?.pathname,
+    });
   };
 
   return (
@@ -36,7 +70,7 @@ const Header = () => {
       >
         <nav className='mx-auto grid max-w-screen-xl grid-flow-col px-6 py-3 sm:px-8 sm:py-4 lg:px-16'>
           <div className='col-start-1 col-end-2 flex items-center'>
-            <Link href='/'>
+            <Link href='/' onClick={handleLogoClick}>
               <Image
                 src='/assets/ostatniBiletLogoGreen.png'
                 width={150}
@@ -88,7 +122,7 @@ const Header = () => {
             </Link>
           </ul>
           <div className='col-start-10 col-end-12 flex items-center justify-end font-medium'>
-            <Link href='/kierunki'>
+            <Link href='/kierunki' onClick={handleDirectionsOptionClick}>
               <ButtonOutline>Kierunki</ButtonOutline>
             </Link>
           </div>
