@@ -66,7 +66,9 @@ export default function DirectionsSearchPage() {
 
   return (
     <>
-      <SeoHead title='Szczegóły' />
+      <SeoHead
+        title={`Szczegóły - ${from}-${to} od:${dateFrom} do:${dateTo}`}
+      />
       <Layout>
         <div className='mt-8 flex justify-center bg-gray-100 py-12'>
           <SearchBar
