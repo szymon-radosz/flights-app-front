@@ -4,6 +4,7 @@ import Flights from 'components/Flights';
 import Layout from 'components/Layout/Layout';
 import SearchBar from 'components/SearchBar';
 import SeoHead from 'components/SeoHead';
+import Share from 'components/Share/Share';
 import { useRouter } from 'next/router';
 import { useEffect, useReducer, useState } from 'react';
 
@@ -88,6 +89,7 @@ export default function DirectionsSearchPage() {
             dateTo={routerState?.dateTo}
             peopleCount={routerState?.peopleCount}
           />
+          <Share />
         </div>
       </Layout>
     </>
