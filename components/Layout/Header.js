@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
+import firebase from './../../firebase';
 // Import react scroll
 import ButtonOutline from '../misc/ButtonOutline.';
 
@@ -18,45 +19,45 @@ const Header = () => {
 
   const handleSetActiveLinkAbout = () => {
     setActiveLink('about');
-    // analytics?.logEvent('click_element', {
-    //   location: 'Header',
-    //   name: 'Home Option',
-    //   activeUrl: window?.location?.pathname,
-    // });
+    firebase?.analytics?.logEvent('click_element', {
+      location: 'Header',
+      name: 'Home Option',
+      activeUrl: window?.location?.pathname,
+    });
   };
 
   const handleSetActiveLinkFeature = () => {
     setActiveLink('feature');
-    // analytics?.logEvent('click_element', {
-    //   location: 'Header',
-    //   name: 'Benefits Option',
-    //   activeUrl: window?.location?.pathname,
-    // });
+    firebase?.analytics?.logEvent('click_element', {
+      location: 'Header',
+      name: 'Benefits Option',
+      activeUrl: window?.location?.pathname,
+    });
   };
 
   const handleSetActiveLinkBlog = () => {
     setActiveLink('blog');
-    // analytics?.logEvent('click_element', {
-    //   location: 'Header',
-    //   name: 'Blog Option',
-    //   activeUrl: window?.location?.pathname,
-    // });
+    firebase?.analytics?.logEvent('click_element', {
+      location: 'Header',
+      name: 'Blog Option',
+      activeUrl: window?.location?.pathname,
+    });
   };
 
   const handleLogoClick = () => {
-    // analytics?.logEvent('click_element', {
-    //   location: 'Header',
-    //   name: 'Logo',
-    //   activeUrl: window?.location?.pathname,
-    // });
+    firebase?.analytics?.logEvent('click_element', {
+      location: 'Header',
+      name: 'Logo',
+      activeUrl: window?.location?.pathname,
+    });
   };
 
   const handleDirectionsOptionClick = () => {
-    // analytics?.logEvent('click_element', {
-    //   location: 'Header',
-    //   name: 'Directions Option',
-    //   activeUrl: window?.location?.pathname,
-    // });
+    firebase?.analytics?.logEvent('click_element', {
+      location: 'Header',
+      name: 'Directions Option',
+      activeUrl: window?.location?.pathname,
+    });
   };
 
   return (
