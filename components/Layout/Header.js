@@ -1,9 +1,9 @@
+import { getAnalytics, logEvent } from 'firebase/analytics';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
-import firebase from './../../firebase';
 // Import react scroll
 import ButtonOutline from '../misc/ButtonOutline.';
 
@@ -11,6 +11,9 @@ const Header = () => {
   const { asPath } = useRouter();
   const [activeLink, setActiveLink] = useState(null);
   const [scrollActive, setScrollActive] = useState(false);
+
+  const analytics = getAnalytics();
+
   useEffect(() => {
     window.addEventListener('scroll', () => {
       setScrollActive(window.scrollY > 20);
@@ -19,7 +22,7 @@ const Header = () => {
 
   const handleSetActiveLinkAbout = () => {
     setActiveLink('about');
-    firebase?.analytics?.logEvent('click_element', {
+    logEvent(analytics, 'click_element', {
       location: 'Header',
       name: 'Home Option',
       activeUrl: window?.location?.pathname,
@@ -28,7 +31,7 @@ const Header = () => {
 
   const handleSetActiveLinkFeature = () => {
     setActiveLink('feature');
-    firebase?.analytics?.logEvent('click_element', {
+    logEvent(analytics, 'click_element', {
       location: 'Header',
       name: 'Benefits Option',
       activeUrl: window?.location?.pathname,
@@ -37,7 +40,7 @@ const Header = () => {
 
   const handleSetActiveLinkBlog = () => {
     setActiveLink('blog');
-    firebase?.analytics?.logEvent('click_element', {
+    logEvent(analytics, 'click_element', {
       location: 'Header',
       name: 'Blog Option',
       activeUrl: window?.location?.pathname,
@@ -45,7 +48,7 @@ const Header = () => {
   };
 
   const handleLogoClick = () => {
-    firebase?.analytics?.logEvent('click_element', {
+    logEvent(analytics, 'click_element', {
       location: 'Header',
       name: 'Logo',
       activeUrl: window?.location?.pathname,
@@ -53,7 +56,7 @@ const Header = () => {
   };
 
   const handleDirectionsOptionClick = () => {
-    firebase?.analytics?.logEvent('click_element', {
+    logEvent(analytics, 'click_element', {
       location: 'Header',
       name: 'Directions Option',
       activeUrl: window?.location?.pathname,
