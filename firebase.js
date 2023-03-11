@@ -1,5 +1,5 @@
 import { getApps, initializeApp } from 'firebase/app';
-import 'firebase/analytics';
+import { getAnalytics } from 'firebase/analytics';
 
 const firebaseConfig = {
   apiKey: process?.env?.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -14,4 +14,17 @@ const firebaseConfig = {
 let firebase =
   getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
-export { firebase };
+// const analytics = () => {
+//   console.log(['tt']);
+//   if (typeof window !== 'undefined') {
+//     return firebase.analytics();
+//   } else {
+//     return null;
+//   }
+// };
+let analytics;
+if (typeof window !== 'undefined') {
+  analytics = getAnalytics(firebase);
+}
+
+export { analytics, firebase };

@@ -1,9 +1,10 @@
-import { getAnalytics, logEvent } from 'firebase/analytics';
+import { logEvent } from 'firebase/analytics';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
+import { analytics } from './../../firebase';
 // Import react scroll
 import ButtonOutline from '../misc/ButtonOutline.';
 
@@ -12,7 +13,7 @@ const Header = () => {
   const [activeLink, setActiveLink] = useState(null);
   const [scrollActive, setScrollActive] = useState(false);
 
-  const analytics = getAnalytics();
+  // const analytics = getAnalytics();
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
