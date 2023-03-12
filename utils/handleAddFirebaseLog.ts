@@ -9,7 +9,7 @@ export default function handleAddFirebaseLog(eventName: string, params?: any) {
   if (process?.env?.NODE_ENV === 'production') {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    console.log(['handleAddFirebaseLog', eventName, params, analytics]);
+    // console.log(['handleAddFirebaseLog', eventName, params, analytics]);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     logEvent(analytics, eventName, params);
