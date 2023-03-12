@@ -32,7 +32,6 @@ export default function DirectionsSearchPage() {
   }, []);
 
   const getDetails = () => {
-    // console.log(['getDetails']);
     if (from && to && dateFrom && dateTo && peopleCount) {
       setRouterState({
         from,

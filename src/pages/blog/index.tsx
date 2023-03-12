@@ -8,7 +8,7 @@ export default function Blog() {
       <SeoHead title='Blog' />
       <Layout>
         <div className='mx-auto mt-28 max-w-screen-xl py-12 px-6 pt-5 xl:px-16'>
-          <BlogPosts />
+          <BlogPosts location='Blog' />
         </div>
       </Layout>
     </>

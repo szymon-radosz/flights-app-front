@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import handleAddFirebaseLog from './../../../utils/handleAddFirebaseLog';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import ButtonOutline from './../../misc/ButtonOutline.';
 
 interface SingleBlogPostProps {
@@ -9,6 +12,7 @@ interface SingleBlogPostProps {
   imgUrl: string;
   url: string;
   additionalTitleClass?: string;
+  location?: string;
 }
 
 const SingleBlogPost = ({
@@ -17,16 +21,28 @@ const SingleBlogPost = ({
   imgUrl,
   url,
   additionalTitleClass,
+  location,
 }: SingleBlogPostProps) => {
+  const redirectUrl = `/blog/${url}`;
+
+  const handleElementPress = () => {
+    handleAddFirebaseLog('click_element', {
+      location: location,
+      name: 'Blog Element',
+      activeUrl: window?.location?.pathname,
+      url: redirectUrl,
+    });
+  };
+
   return (
-    <Link href={`/blog/${url}`}>
+    <Link href={redirectUrl} onClick={handleElementPress}>
       <article className='bg-white rounded-xl py-3 shadow-lg duration-300 hover:scale-105 hover:transform hover:shadow-xl '>
         <a href='#'>
           <div className='relative flex items-end overflow-hidden rounded-t-xl'>
             <Image
               src={imgUrl}
               alt={title}
-              layout='responsive'
+              // layout='responsive'
               width={500}
               height={300}
               quality={100}

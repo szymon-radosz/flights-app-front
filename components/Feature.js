@@ -18,7 +18,7 @@ const Feature = () => {
             <Image
               src='/assets/main2.jpeg'
               alt='Image by pch.vector on Freepik'
-              layout='responsive'
+              // layout='responsive'
               quality={100}
               height={414}
               width={508}

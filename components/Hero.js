@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useMemo } from 'react';
 
+import handleAddFirebaseLog from './../utils/handleAddFirebaseLog';
 import ScrollAnimationWrapper from './Layout/ScrollAnimationWrapper';
 import ButtonPrimary from './misc/ButtonPrimary';
 import getScrollAnimation from '../utils/getScrollAnimation';
@@ -28,6 +29,14 @@ const Hero = ({
 }) => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), []);
 
+  const handleHeaderBtnPress = () => {
+    handleAddFirebaseLog('click_element', {
+      location: 'Home',
+      name: 'Home Header Btn',
+      activeUrl: window?.location?.pathname,
+    });
+  };
+
   return (
     <>
       <div id='about' className='absolute top-0 left-0'></div>
@@ -46,7 +55,7 @@ const Hero = ({
                 na bilety lotnicze.
               </p>
               <div className='flex w-full justify-center sm:block'>
-                <Link href='/kierunki'>
+                <Link href='/kierunki' onClick={handleHeaderBtnPress}>
                   <ButtonPrimary>Pokaż dostępne kierunki</ButtonPrimary>
                 </Link>
               </div>
@@ -59,7 +68,7 @@ const Hero = ({
                   quality={100}
                   width={612}
                   height={383}
-                  layout='responsive'
+                  // layout='responsive'
                 />
               </motion.div>
             </div>
@@ -76,7 +85,7 @@ const Hero = ({
                 variants={scrollAnimation}
               >
                 <div className='mx-auto flex w-40 sm:w-auto'>
-                  <div className='bg-green-100 mr-6 flex h-12 w-12 items-center justify-center rounded-full'>
+                  <div className='mr-6 flex h-12 w-12 items-center justify-center rounded-full bg-green-100'>
                     <img src={listUsers.icon} className='h-6 w-6' />
                   </div>
                   <div className='flex flex-col'>

@@ -1,10 +1,9 @@
-import { logEvent } from 'firebase/analytics';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
-import { analytics } from './../../firebase';
+import handleAddFirebaseLog from './../../utils/handleAddFirebaseLog';
 // Import react scroll
 import ButtonOutline from '../misc/ButtonOutline.';
 
@@ -23,7 +22,7 @@ const Header = () => {
 
   const handleSetActiveLinkAbout = () => {
     setActiveLink('about');
-    logEvent(analytics, 'click_element', {
+    handleAddFirebaseLog('click_element', {
       location: 'Header',
       name: 'Home Option',
       activeUrl: window?.location?.pathname,
@@ -32,7 +31,7 @@ const Header = () => {
 
   const handleSetActiveLinkFeature = () => {
     setActiveLink('feature');
-    logEvent(analytics, 'click_element', {
+    handleAddFirebaseLog('click_element', {
       location: 'Header',
       name: 'Benefits Option',
       activeUrl: window?.location?.pathname,
@@ -41,7 +40,7 @@ const Header = () => {
 
   const handleSetActiveLinkBlog = () => {
     setActiveLink('blog');
-    logEvent(analytics, 'click_element', {
+    handleAddFirebaseLog('click_element', {
       location: 'Header',
       name: 'Blog Option',
       activeUrl: window?.location?.pathname,
@@ -49,7 +48,7 @@ const Header = () => {
   };
 
   const handleLogoClick = () => {
-    logEvent(analytics, 'click_element', {
+    handleAddFirebaseLog('click_element', {
       location: 'Header',
       name: 'Logo',
       activeUrl: window?.location?.pathname,
@@ -57,7 +56,7 @@ const Header = () => {
   };
 
   const handleDirectionsOptionClick = () => {
-    logEvent(analytics, 'click_element', {
+    handleAddFirebaseLog('click_element', {
       location: 'Header',
       name: 'Directions Option',
       activeUrl: window?.location?.pathname,

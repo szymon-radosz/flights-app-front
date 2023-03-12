@@ -1,9 +1,27 @@
 import Image from 'next/image';
 import React from 'react';
 
+import handleAddFirebaseLog from './../../utils/handleAddFirebaseLog';
 import Facebook from '../../public/assets/Icon/facebook.svg';
 import Instagram from '../../public/assets/Icon/instagram.svg';
+
 const Footer = () => {
+  const handleFacebookPress = () => {
+    handleAddFirebaseLog('click_element', {
+      location: 'Footer',
+      name: 'Footer Facebook',
+      activeUrl: window?.location?.pathname,
+    });
+  };
+
+  const handleInstagramPress = () => {
+    handleAddFirebaseLog('click_element', {
+      location: 'Footer',
+      name: 'Footer Instgram',
+      activeUrl: window?.location?.pathname,
+    });
+  };
+
   return (
     <div className='bg-white-300 pt-6 pb-6 lg:pt-12 lg:pb-12 '>
       <div className='mx-auto mb-5 w-full max-w-screen-xl grid-flow-row grid-cols-3 grid-rows-6 gap-4 px-6 sm:mb-0 sm:grid-flow-col sm:grid-cols-12 sm:grid-rows-1 sm:px-8 lg:px-16'>
@@ -34,6 +52,7 @@ const Footer = () => {
                 target='_blank'
                 title='Facebook'
                 rel='noopener noreferrer'
+                onClick={handleFacebookPress}
               >
                 <Facebook className='h-6 w-6' />
               </a>
@@ -44,6 +63,7 @@ const Footer = () => {
                 target='_blank'
                 title='Instagram'
                 rel='noopener noreferrer'
+                onClick={handleInstagramPress}
               >
                 <Instagram className='h-6 w-6' />
               </a>

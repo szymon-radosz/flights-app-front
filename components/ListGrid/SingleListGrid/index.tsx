@@ -1,15 +1,24 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import handleAddFirebaseLog from './../../../utils/handleAddFirebaseLog';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import ButtonOutline from './../../misc/ButtonOutline.';
 
 interface SingleListGridProps {
   cityFrom: string;
   cityTo: string;
   img: string;
+  location?: string;
 }
 
-const SingleListGrid = ({ cityFrom, cityTo, img }: SingleListGridProps) => {
+const SingleListGrid = ({
+  cityFrom,
+  cityTo,
+  img,
+  location,
+}: SingleListGridProps) => {
   const dateTwoWeeksOver = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000)
     .toISOString()
     .slice(0, 10);
@@ -18,17 +27,26 @@ const SingleListGrid = ({ cityFrom, cityTo, img }: SingleListGridProps) => {
     .toISOString()
     .slice(0, 10);
 
+  const redirectUrl = `/kierunki/${cityFrom}/${cityTo}/${dateTwoWeeksOver}/${dateThreeWeeksOver}/1`;
+
+  const handleElementPress = () => {
+    handleAddFirebaseLog('click_element', {
+      location: location,
+      name: 'Directions Element',
+      activeUrl: window?.location?.pathname,
+      url: redirectUrl,
+    });
+  };
+
   return (
-    <Link
-      href={`/kierunki/${cityFrom}/${cityTo}/${dateTwoWeeksOver}/${dateThreeWeeksOver}/1`}
-    >
+    <Link href={redirectUrl} onClick={handleElementPress}>
       <article className='bg-white rounded-xl py-3 shadow-lg duration-300 hover:scale-105 hover:transform hover:shadow-xl '>
         <a href='#'>
           <div className='relative flex items-end overflow-hidden rounded-t-xl'>
             <Image
               src={img}
               alt={cityTo}
-              layout='responsive'
+              // layout='responsive'
               width={500}
               height={300}
               quality={100}

@@ -1,9 +1,11 @@
 import axios from 'axios';
-// import { NextResponse, NextRequest } from 'next/server';
-// import Router from 'next/router';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import handleAddFirebaseLog from './../../utils/handleAddFirebaseLog';
 
 interface SearchBarProps {
   setFoundFlights: any;
@@ -60,13 +62,6 @@ const SearchBar = ({
       setCityFrom(initialDirectionFrom);
       setCityTo(initialDirectionTo);
       setPeopleCount(initialPeopleCount);
-      // handleSubmit(
-      //   initialDateFrom,
-      //   initialDateTo,
-      //   initialDirectionFrom,
-      //   initialDirectionTo,
-      //   initialPeopleCount
-      // );
     }
   }, [
     initialDateFrom,
@@ -132,51 +127,20 @@ const SearchBar = ({
     initialDirectionTo?: string,
     initialPeopleCount?: number
   ) => {
-    // if (isListView && cityFrom && cityTo && date) {
     if (cityFrom && cityTo && date) {
-      // console.log(['if']);
+      handleAddFirebaseLog('search', {
+        name: 'SearchBar Submit',
+        activeUrl: window?.location?.pathname,
+        cityFrom: cityFrom,
+        cityTo: cityTo,
+        startDate: date?.startDate,
+        endDate: date?.endDate,
+        peopleCount: peopleCount,
+      });
       return router.push(
         `/kierunki/${cityFrom}/${cityTo}/${date?.startDate}/${date?.endDate}/${peopleCount}`
       );
     }
-    // } else if (
-    //   (cityFrom && cityTo && date) ||
-    //   (initialDateFrom &&
-    //     initialDateTo &&
-    //     initialDirectionFrom &&
-    //     initialDirectionTo)
-    // ) {
-    //   console.log('else if');
-    //   axios
-    //     .get(
-    //       `${process?.env?.NEXT_PUBLIC_API_URL}flight/${(initialDirectionFrom
-    //         ? initialDirectionFrom
-    //         : cityFrom
-    //       )
-    //         .normalize('NFD')
-    //         .replace(/\u0142/g, 'l')
-    //         .replace(/\u0141/g, 'L')
-    //         .replace(/[\u0300-\u036f]/g, '')}/${(initialDirectionTo
-    //         ? initialDirectionTo
-    //         : cityTo
-    //       )
-    //         .normalize('NFD')
-    //         .replace(/\u0142/g, 'l')
-    //         .replace(/\u0141/g, 'L')
-    //         .replace(/[\u0300-\u036f]/g, '')}/${
-    //         initialDateFrom ? initialDateFrom : date?.startDate
-    //       }/${initialDateTo ? initialDateTo : date?.endDate}`
-    //     )
-    //     .then((response) => {
-    //       if (response?.data) {
-    //         setFoundFlights(response?.data);
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       setFoundFlights([]);
-    //       // console.log(error);
-    //     });
-    // }
   };
 
   return (

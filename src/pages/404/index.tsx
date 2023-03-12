@@ -17,7 +17,7 @@ export default function Directions() {
             <Image
               src='/assets/404.png'
               alt='404'
-              layout='responsive'
+              // layout='responsive'
               width={500}
               height={300}
               quality={100}
