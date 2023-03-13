@@ -4,11 +4,11 @@ import Layout from '../../../../components/Layout/Layout';
 import SeoHead from '../../../../components/SeoHead';
 
 export default function Article2() {
-  const title = 'Blog | Oszczędzanie pieniędzy na noclegu';
+  const title = 'Oszczędzanie pieniędzy na noclegu | ostatnibilet.pl';
 
   return (
     <>
-      <SeoHead title='Blog | Oszczędzanie pieniędzy na noclegu' />
+      <SeoHead title={title} />
       <Layout>
         <div className='mx-auto mt-20 max-w-screen-xl px-6 pt-20 xl:px-16'>
           <Image

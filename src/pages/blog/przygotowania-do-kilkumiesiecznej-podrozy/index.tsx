@@ -4,7 +4,7 @@ import Layout from '../../../../components/Layout/Layout';
 import SeoHead from '../../../../components/SeoHead';
 
 export default function Article1() {
-  const title = 'Blog | Przygotowania do kilkumiesięcznej podróży';
+  const title = 'Przygotowania do kilkumiesięcznej podróży | ostatnibilet.pl';
 
   return (
     <>

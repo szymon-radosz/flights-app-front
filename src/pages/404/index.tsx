@@ -10,7 +10,7 @@ import SeoHead from '../../../components/SeoHead';
 export default function Directions() {
   return (
     <>
-      <SeoHead title='404 | Nie znaleziono strony' />
+      <SeoHead title='404 | ostatnibilet.pl' />
       <Layout>
         <div className='mx-auto mt-20 max-w-screen-xl px-6 pt-20 xl:px-16'>
           <div className='lg:align-center block sm:pt-10v sm:pb-10v md:pt-10v md:pb-10v lg:flex lg:justify-center'>

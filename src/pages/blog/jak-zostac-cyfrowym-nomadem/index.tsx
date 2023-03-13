@@ -4,7 +4,7 @@ import Layout from '../../../../components/Layout/Layout';
 import SeoHead from '../../../../components/SeoHead';
 
 export default function Article3() {
-  const title = 'Blog | Jak zostać cyfrowym nomadem?';
+  const title = 'Jak zostać cyfrowym nomadem? | ostatnibilet.pl';
 
   return (
     <>

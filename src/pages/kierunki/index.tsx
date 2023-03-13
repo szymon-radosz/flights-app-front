@@ -10,7 +10,7 @@ export default function Directions() {
 
   return (
     <>
-      <SeoHead title='Kierunki' />
+      <SeoHead title='Kierunki | ostatnibilet.pl' />
       <Layout>
         <div className='mt-8 flex justify-center bg-gray-100 py-12'>
           <SearchBar setFoundFlights={setFoundFlights} isListView={true} />

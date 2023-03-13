@@ -67,7 +67,7 @@ export default function DirectionsSearchPage() {
   return (
     <>
       <SeoHead
-        title={`Szczegóły - ${from}-${to} od:${dateFrom} do:${dateTo}`}
+        title={`Szczegóły - ${from}-${to} od:${dateFrom} do:${dateTo} | ostatnibilet.pl`}
       />
       <Layout>
         <div className='mt-8 flex justify-center bg-gray-100 py-12'>

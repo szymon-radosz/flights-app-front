@@ -4,7 +4,7 @@ import Layout from '../../../../components/Layout/Layout';
 import SeoHead from '../../../../components/SeoHead';
 
 export default function Article4() {
-  const title = 'Blog | Oszczędzanie pieniędzy podczas podróży';
+  const title = 'Oszczędzanie pieniędzy podczas podróży | ostatnibilet.pl';
 
   return (
     <>

@@ -8,7 +8,7 @@ import SeoHead from '../../components/SeoHead';
 export default function Home() {
   return (
     <>
-      <SeoHead title='Strona Główna' />
+      <SeoHead title='Strona Główna | ostatnibilet.pl' />
       <Layout>
         <Hero />
         <Feature />
