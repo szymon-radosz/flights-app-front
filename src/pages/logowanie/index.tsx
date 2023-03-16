@@ -1,14 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { postRequest } from 'utils/api';
 
+import { setAlert } from '../../store/alertSlice';
+import { selectAuthState, setAuthState } from '../../store/authSlice';
+import { setLoader } from '../../store/loaderSlice';
 import Layout from '../../../components/Layout/Layout';
 import SeoHead from '../../../components/SeoHead';
 
 export default function Login() {
-  // const [email, setEmail] = useState(null)
-  // const [password, setPassword] = useState(null)
+  const authState = useSelector(selectAuthState);
+  const dispatch = useDispatch();
 
   const [data, setData] = useState({
     email: '',
@@ -19,14 +23,32 @@ export default function Login() {
     setData({ ...data, [key]: value });
   };
 
-  const handleSubmit = async () => {
-    if (data?.email && data?.password) {
-      const response = await postRequest('login', {
-        email: data?.email,
-        password: data?.password,
-      });
+  const callSetLoader = (status: boolean) => {
+    dispatch(setLoader(status));
+  };
 
-      console.log(['response', response]);
+  const callSetAlert = (show: boolean, msg: string, type: string) => {
+    dispatch(setAlert({ show: show, msg: msg, type: type }));
+  };
+
+  const handleSubmit = async () => {
+    console.log(['authState', authState]);
+    if (data?.email && data?.password) {
+      const response: any = await postRequest(
+        'login',
+        {
+          email: data?.email,
+          password: data?.password,
+        },
+        callSetLoader,
+        callSetAlert
+      );
+
+      console.log(['response', response, authState]);
+
+      if (response?.success) {
+        dispatch(setAuthState(true));
+      }
     } else {
       //alert
     }
