@@ -1,12 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { postRequest } from 'utils/api';
 
+import { setAlert } from '../../store/alertSlice';
+import { setLoader } from '../../store/loaderSlice';
 import Layout from '../../../components/Layout/Layout';
 import SeoHead from '../../../components/SeoHead';
 
 export default function Register() {
+  const dispatch = useDispatch();
+
   const [data, setData] = useState({
     name: '',
     email: '',
@@ -18,17 +23,31 @@ export default function Register() {
     setData({ ...data, [key]: value });
   };
 
+  const callSetLoader = (status: boolean) => {
+    dispatch(setLoader(status));
+  };
+
+  const callSetAlert = (show: boolean, msg: string, type: string) => {
+    dispatch(setAlert({ show: show, msg: msg, type: type }));
+  };
+
   const handleSubmit = async () => {
     if (data?.name && data?.email && data?.password) {
-      const response = await postRequest('register', {
-        name: data?.name,
-        email: data?.email,
-        password: data?.password,
-        is_guide: data?.isGuide,
-      });
+      const response = await postRequest(
+        'register',
+        {
+          name: data?.name,
+          email: data?.email,
+          password: data?.password,
+          is_guide: data?.isGuide,
+        },
+        callSetLoader,
+        callSetAlert
+      );
 
       console.log(['response', response]);
     } else {
+      callSetAlert(true, 'Wszystkie pola są wymagane.', 'error');
       //alert
     }
   };

@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+const capitalize = (s: string) => {
+  return s[0].toUpperCase() + s.slice(1);
+};
+
 export function postRequest(
   url: string,
   data: any,
@@ -18,13 +22,26 @@ export function postRequest(
           resolve(response?.data);
         })
         .catch((err) => {
-          callSetAlert(true, err?.response?.data?.message, 'error');
-          console.log(['postRequest err', err?.response?.data?.message]);
+          const errMessagesValues = err?.response?.data?.data
+            ? Object.values(err?.response?.data?.data).flat()
+            : null;
+          const errMessagesList = errMessagesValues
+            ? errMessagesValues.map((value: any) => `${value}`).join('. ')
+            : null;
+
+          callSetAlert(
+            true,
+            `${err?.response?.data?.message} ${
+              errMessagesList ? capitalize(errMessagesList) : ''
+            }`,
+            'error'
+          );
+          console.log(['postRequest err1', err?.response?.data]);
           reject(err);
         });
     } catch (err: any) {
       console.log(['postRequest err', err]);
-      callSetAlert(true, err?.response?.data?.message, 'error');
+      // callSetAlert(true, `${err?.response?.data?.message}`, 'error');
       reject(err);
     } finally {
       setTimeout(() => {
@@ -58,7 +75,7 @@ export function getRequest(
         });
     } catch (err: any) {
       console.log(['postRequest err', err]);
-      callSetAlert(true, err?.response?.data?.message, 'error');
+      // callSetAlert(true, err?.response?.data?.message, 'error');
       reject(err);
     } finally {
       setTimeout(() => {

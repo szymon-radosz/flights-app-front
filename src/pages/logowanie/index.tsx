@@ -50,6 +50,7 @@ export default function Login() {
         dispatch(setAuthState(true));
       }
     } else {
+      callSetAlert(true, 'Wszystkie pola są wymagane.', 'error');
       //alert
     }
   };
