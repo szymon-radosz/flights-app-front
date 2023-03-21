@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setAlert } from '../../src/store/alertSlice';
+import { setAlert } from '../../src/store/alert';
 
 interface Props {
   msg: string;
@@ -15,7 +15,7 @@ const Alert = ({ msg, type }: Props) => {
   const [showAlert, setShowAlert] = useState(true);
 
   useEffect(() => {
-    console.log(['msg', msg]);
+    // console.log(['msg', msg]);
     // setShowAlert(true);
 
     setTimeout(() => {

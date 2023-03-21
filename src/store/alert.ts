@@ -22,7 +22,7 @@ const initialState: AlertState = {
 };
 
 // Actual Slice
-export const alertSlice = createSlice({
+export const alert = createSlice({
   name: 'alert',
   initialState,
   reducers: {
@@ -42,8 +42,8 @@ export const alertSlice = createSlice({
   },
 });
 
-export const { setAlert } = alertSlice.actions;
+export const { setAlert } = alert.actions;
 
 export const selectAlertState = (state: AppState) => state.alert.alertState;
 
-export default alertSlice.reducer;
+export default alert.reducer;

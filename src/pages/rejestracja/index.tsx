@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postRequest } from 'utils/api';
 
-import { setAlert } from '../../store/alertSlice';
-import { setLoader } from '../../store/loaderSlice';
+import { setAlert } from '../../store/alert';
+import { setLoader } from '../../store/loader';
 import Layout from '../../../components/Layout/Layout';
 import SeoHead from '../../../components/SeoHead';
 
@@ -45,7 +45,7 @@ export default function Register() {
         callSetAlert
       );
 
-      console.log(['response', response]);
+      // console.log(['response', response]);
     } else {
       callSetAlert(true, 'Wszystkie pola są wymagane.', 'error');
       //alert

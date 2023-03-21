@@ -17,7 +17,7 @@ export function postRequest(
       axios
         .post(`${process?.env?.NEXT_PUBLIC_API_URL}${url}`, data)
         .then((response) => {
-          console.log(['postRequest response', response?.data]);
+          // console.log(['postRequest response', response?.data]);
           callSetAlert(true, response?.data?.message, 'success');
           resolve(response?.data);
         })
@@ -36,11 +36,11 @@ export function postRequest(
             }`,
             'error'
           );
-          console.log(['postRequest err1', err?.response?.data]);
+          // console.log(['postRequest err1', err?.response?.data]);
           reject(err);
         });
     } catch (err: any) {
-      console.log(['postRequest err', err]);
+      // console.log(['postRequest err', err]);
       // callSetAlert(true, `${err?.response?.data?.message}`, 'error');
       reject(err);
     } finally {
@@ -65,16 +65,16 @@ export function getRequest(
         .get(`${process?.env?.NEXT_PUBLIC_API_URL}${url}`, data)
         .then((response) => {
           callSetAlert(true, response?.data?.message, 'success');
-          console.log(['getRequest response', response?.data]);
+          // console.log(['getRequest response', response?.data]);
           resolve(response?.data);
         })
         .catch((err) => {
           callSetAlert(true, err?.response?.data?.message, 'error');
-          console.log(['getRequest err', err?.response?.data?.message]);
+          // console.log(['getRequest err', err?.response?.data?.message]);
           reject(err);
         });
     } catch (err: any) {
-      console.log(['postRequest err', err]);
+      // console.log(['postRequest err', err]);
       // callSetAlert(true, err?.response?.data?.message, 'error');
       reject(err);
     } finally {

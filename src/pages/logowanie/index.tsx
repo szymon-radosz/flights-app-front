@@ -4,14 +4,14 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postRequest } from 'utils/api';
 
-import { setAlert } from '../../store/alertSlice';
-import { selectAuthState, setAuthState } from '../../store/authSlice';
-import { setLoader } from '../../store/loaderSlice';
+import { setAlert } from '../../store/alert';
+import { selectAuth, setAuth } from '../../store/auth';
+import { setLoader } from '../../store/loader';
 import Layout from '../../../components/Layout/Layout';
 import SeoHead from '../../../components/SeoHead';
 
 export default function Login() {
-  const authState = useSelector(selectAuthState);
+  const authState = useSelector(selectAuth);
   const dispatch = useDispatch();
 
   const [data, setData] = useState({
@@ -32,7 +32,7 @@ export default function Login() {
   };
 
   const handleSubmit = async () => {
-    console.log(['authState', authState]);
+    // console.log(['authState', authState]);
     if (data?.email && data?.password) {
       const response: any = await postRequest(
         'login',
@@ -44,10 +44,15 @@ export default function Login() {
         callSetAlert
       );
 
-      console.log(['response', response, authState]);
+      // console.log(['response', response, authState, response?.data?.token]);
 
-      if (response?.success) {
-        dispatch(setAuthState(true));
+      if (response?.success && response?.data?.token) {
+        dispatch(
+          setAuth({
+            token: response?.data?.token,
+            email: data?.email,
+          })
+        );
       }
     } else {
       callSetAlert(true, 'Wszystkie pola są wymagane.', 'error');

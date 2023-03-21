@@ -2,12 +2,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import { selectAuth } from '@/store/auth';
 
 import handleAddFirebaseLog from './../../utils/handleAddFirebaseLog';
 // Import react scroll
 import ButtonOutline from '../misc/ButtonOutline.';
 
 const Header = () => {
+  const auth = useSelector(selectAuth);
   const { asPath } = useRouter();
   const [activeLink, setActiveLink] = useState(null);
   const [scrollActive, setScrollActive] = useState(false);
@@ -59,6 +63,14 @@ const Header = () => {
     handleAddFirebaseLog('click_element', {
       location: 'Header',
       name: 'Directions Option',
+      activeUrl: window?.location?.pathname,
+    });
+  };
+
+  const handleAccountClick = () => {
+    handleAddFirebaseLog('click_element', {
+      location: 'Header',
+      name: 'Account Option',
       activeUrl: window?.location?.pathname,
     });
   };
@@ -125,6 +137,12 @@ const Header = () => {
             </Link>
           </ul>
           <div className='col-start-10 col-end-12 flex items-center justify-end font-medium'>
+            {auth?.email && (
+              <Link href='/konto' onClick={handleAccountClick}>
+                <p>{auth?.email}</p>
+              </Link>
+            )}
+
             <Link href='/kierunki' onClick={handleDirectionsOptionClick}>
               <ButtonOutline>Kierunki</ButtonOutline>
             </Link>

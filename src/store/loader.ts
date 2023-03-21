@@ -14,7 +14,7 @@ const initialState: LoaderState = {
 };
 
 // Actual Slice
-export const loaderSlice = createSlice({
+export const loader = createSlice({
   name: 'loader',
   initialState,
   reducers: {
@@ -34,8 +34,8 @@ export const loaderSlice = createSlice({
   },
 });
 
-export const { setLoader } = loaderSlice.actions;
+export const { setLoader } = loader.actions;
 
 export const selectloaderState = (state: AppState) => state.loader.loaderState;
 
-export default loaderSlice.reducer;
+export default loader.reducer;

@@ -5,21 +5,27 @@ import { AppState } from './store';
 
 // Type for our state
 export interface AuthState {
-  authState: boolean;
+  authState: {
+    token: string;
+    email: string;
+  };
 }
 
 // Initial state
 const initialState: AuthState = {
-  authState: false,
+  authState: {
+    token: '',
+    email: '',
+  },
 };
 
 // Actual Slice
-export const authSlice = createSlice({
+export const auth = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     // Action to set the authentication status
-    setAuthState(state, action) {
+    setAuth(state, action) {
       state.authState = action.payload;
     },
   },
@@ -35,8 +41,8 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setAuthState } = authSlice.actions;
+export const { setAuth } = auth.actions;
 
-export const selectAuthState = (state: AppState) => state.auth.authState;
+export const selectAuth = (state: AppState) => state.auth.authState;
 
-export default authSlice.reducer;
+export default auth.reducer;

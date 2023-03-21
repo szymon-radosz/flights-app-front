@@ -2,8 +2,8 @@ import Image from 'next/image';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectAlertState } from '@/store/alertSlice';
-import { selectloaderState } from '@/store/loaderSlice';
+import { selectAlertState } from '@/store/alert';
+import { selectloaderState } from '@/store/loader';
 
 import Alert from './../../components/Alert';
 import Footer from './Footer';
