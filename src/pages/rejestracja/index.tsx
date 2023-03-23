@@ -188,7 +188,7 @@ export default function Register() {
                                       Przewodnikiem
                                     </span>
                                     <br />
-                                    Chcę oferować pomoc turystą w pokazywaniu
+                                    Chcę oferować pomoc turystom w pokazywaniu
                                     okolicy
                                   </label>
                                 </div>

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postRequest } from 'utils/api';
@@ -11,6 +12,7 @@ import Layout from '../../../components/Layout/Layout';
 import SeoHead from '../../../components/SeoHead';
 
 export default function Login() {
+  const router = useRouter();
   const authState = useSelector(selectAuth);
   const dispatch = useDispatch();
 
@@ -53,6 +55,7 @@ export default function Login() {
             email: data?.email,
           })
         );
+        router.push('/konto');
       }
     } else {
       callSetAlert(true, 'Wszystkie pola są wymagane.', 'error');

@@ -8,14 +8,15 @@ export function postRequest(
   url: string,
   data: any,
   callSetLoader?: any,
-  callSetAlert?: any
+  callSetAlert?: any,
+  headers?: any
 ) {
   return new Promise((resolve, reject) => {
     callSetLoader && callSetLoader(true);
 
     try {
       axios
-        .post(`${process?.env?.NEXT_PUBLIC_API_URL}${url}`, data)
+        .post(`${process?.env?.NEXT_PUBLIC_API_URL}${url}`, data, headers)
         .then((response) => {
           // console.log(['postRequest response', response?.data]);
           callSetAlert(true, response?.data?.message, 'success');
@@ -53,16 +54,16 @@ export function postRequest(
 
 export function getRequest(
   url: string,
-  data: any,
   callSetLoader?: any,
-  callSetAlert?: any
+  callSetAlert?: any,
+  headers?: any
 ) {
   return new Promise((resolve, reject) => {
     callSetLoader && callSetLoader(true);
 
     try {
       axios
-        .get(`${process?.env?.NEXT_PUBLIC_API_URL}${url}`, data)
+        .get(`${process?.env?.NEXT_PUBLIC_API_URL}${url}`, headers)
         .then((response) => {
           callSetAlert(true, response?.data?.message, 'success');
           // console.log(['getRequest response', response?.data]);

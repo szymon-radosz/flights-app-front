@@ -81,7 +81,14 @@ export default function DirectionsSearchPage() {
           />
         </div>
         <div className='mx-auto max-w-screen-xl px-8 xl:px-16'>
-          <Flights foundFlights={foundFlights} />
+          <Flights
+            foundFlights={foundFlights}
+            dateFrom={dateFrom}
+            dateTo={dateTo}
+            directionFrom={from}
+            directionTo={to}
+            peopleCount={peopleCount}
+          />
           <Accomodation
             directionTo={routerState?.to}
             dateFrom={routerState?.dateFrom}

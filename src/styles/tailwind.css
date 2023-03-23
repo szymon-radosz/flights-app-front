@@ -84,10 +84,10 @@ li.check:before {
 .datepicker__container > div > div > div:last-child {
   border: none;
 }
-
+/* 
 .datepicker__container .bg-green-500 {
   border-radius: 50%;
-}
+} */
 
 .datepicker__container .flex.items-center .bg-green-500 {
   background-color: #fff;

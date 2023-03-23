@@ -75,6 +75,14 @@ const Header = () => {
     });
   };
 
+  const handleLoginClick = () => {
+    handleAddFirebaseLog('click_element', {
+      location: 'Header',
+      name: 'Login Option',
+      activeUrl: window?.location?.pathname,
+    });
+  };
+
   return (
     <>
       <header
@@ -137,9 +145,13 @@ const Header = () => {
             </Link>
           </ul>
           <div className='col-start-10 col-end-12 flex items-center justify-end font-medium'>
-            {auth?.email && (
+            {auth?.email ? (
               <Link href='/konto' onClick={handleAccountClick}>
-                <p>{auth?.email}</p>
+                <p className='mr-3 text-black-100'>Konto</p>
+              </Link>
+            ) : (
+              <Link href='/logowanie' onClick={handleLoginClick}>
+                <p className='mr-3 text-black-100'>Logowanie</p>
               </Link>
             )}
 

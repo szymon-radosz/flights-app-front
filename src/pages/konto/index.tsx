@@ -1,23 +1,184 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRequest } from 'utils/api';
 
 import { selectAuth } from '@/store/auth';
 
+import handleAddFirebaseLog from './../../../utils/handleAddFirebaseLog';
+import { setAlert } from '../../store/alert';
+import { setLoader } from '../../store/loader';
 import Layout from '../../../components/Layout/Layout';
+import ButtonOutline from '../../../components/misc/ButtonOutline.';
+// Import react scroll
 import SeoHead from '../../../components/SeoHead';
-
 export default function Konto() {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const auth = useSelector(selectAuth);
 
   useEffect(() => {
     //check if logged in
-    console.log(['konto', auth?.token]);
+    // console.log(['konto', auth?.token]);
+    if (!auth?.token) {
+      router.push('/logowanie');
+    } else {
+      getSavedTravels();
+    }
   }, []);
+
+  const handlePlanClick = () => {
+    handleAddFirebaseLog('click_element', {
+      location: 'Account',
+      name: 'Plan a trip',
+      activeUrl: window?.location?.pathname,
+    });
+  };
+
+  const handleTravelClick = () => {
+    handleAddFirebaseLog('click_element', {
+      location: 'Account',
+      name: 'Show Travel Details',
+      activeUrl: window?.location?.pathname,
+    });
+  };
+
+  const callSetLoader = (status: boolean) => {
+    dispatch(setLoader(status));
+  };
+
+  const callSetAlert = (show: boolean, msg: string, type: string) => {
+    dispatch(setAlert({ show: show, msg: msg, type: type }));
+  };
+
+  const getSavedTravels = async () => {
+    const response: any = await getRequest(
+      'saved-travels/list',
+      callSetLoader,
+      callSetAlert,
+      {
+        headers: {
+          Authorization: `Bearer ${auth?.token}`,
+        },
+      }
+    );
+
+    console.log(['response', response]);
+
+    // if (response?.success) {
+    //   dispatch(
+    //     setAuth({
+    //       token: response?.data?.token,
+    //       email: data?.email,
+    //     })
+    //   );
+    //   router.push('/konto');
+    // }
+  };
 
   return (
     <>
       <SeoHead title='Konto | ostatnibilet.pl' />
-      <Layout>Konto</Layout>
+      <Layout>
+        <div className='mx-auto mt-20 max-w-screen-xl px-6 pt-20 xl:px-16'>
+          <h3 className='font-bold uppercase text-black-500'>
+            Zapisane przez Ciebie
+          </h3>
+          <h2 className='text-2xl font-bold font-medium leading-normal text-black-600 lg:text-3xl xl:text-3xl'>
+            Podróże
+          </h2>
+          <div className='mx-auto grid max-w-6xl  grid-cols-1 gap-6 pt-3 pb-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+            <Link href='/kierunki' onClick={handleTravelClick}>
+              <article className='bg-white rounded-xl py-3 shadow-lg duration-300 hover:scale-105 hover:transform hover:shadow-xl '>
+                <a href='#'>
+                  <div className='relative flex items-end overflow-hidden rounded-t-xl'>
+                    <Image
+                      src='/assets/locations/londyn.png'
+                      alt='podroz'
+                      // layout='responsive'
+                      width={500}
+                      height={300}
+                      quality={100}
+                    />
+                  </div>
+
+                  <div className='mt-1 px-4 pt-4 pb-2.5'>
+                    <h2 className='font-bold'>Warszawa-Londyn</h2>
+                    <div className='mt-3 flex items-end justify-between'>
+                      <div className='bg-blue-500 text-white hover:bg-blue-600 flex items-center rounded-lg py-1.5 duration-100'>
+                        <Link href='/kierunki/Warszawa/Londyn/2023-03-03/2023-03-04/1'>
+                          <ButtonOutline>Pokaż</ButtonOutline>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            </Link>
+            <Link href='/kierunki' onClick={handleTravelClick}>
+              <article className='bg-white rounded-xl py-3 shadow-lg duration-300 hover:scale-105 hover:transform hover:shadow-xl '>
+                <a href='#'>
+                  <div className='relative flex items-end overflow-hidden rounded-t-xl'>
+                    <Image
+                      src='/assets/locations/londyn.png'
+                      alt='podroz'
+                      // layout='responsive'
+                      width={500}
+                      height={300}
+                      quality={100}
+                    />
+                  </div>
+
+                  <div className='mt-1 px-4 pt-4 pb-2.5'>
+                    <h2 className='font-bold'>Warszawa-Londyn</h2>
+                    <div className='mt-3 flex items-end justify-between'>
+                      <div className='bg-blue-500 text-white hover:bg-blue-600 flex items-center rounded-lg py-1.5 duration-100'>
+                        <Link href='/kierunki/Warszawa/Londyn/2023-03-03/2023-03-04/1'>
+                          <ButtonOutline>Pokaż</ButtonOutline>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            </Link>
+            <Link href='/kierunki' onClick={handleTravelClick}>
+              <article className='bg-white rounded-xl py-3 shadow-lg duration-300 hover:scale-105 hover:transform hover:shadow-xl '>
+                <a href='#'>
+                  <div className='relative flex items-end overflow-hidden rounded-t-xl'>
+                    <Image
+                      src='/assets/locations/londyn.png'
+                      alt='podroz'
+                      // layout='responsive'
+                      width={500}
+                      height={300}
+                      quality={100}
+                    />
+                  </div>
+
+                  <div className='mt-1 px-4 pt-4 pb-2.5'>
+                    <h2 className='font-bold'>Warszawa-Londyn</h2>
+                    <div className='mt-3 flex items-end justify-between'>
+                      <div className='bg-blue-500 text-white hover:bg-blue-600 flex items-center rounded-lg py-1.5 duration-100'>
+                        <Link href='/kierunki/Warszawa/Londyn/2023-03-03/2023-03-04/1'>
+                          <ButtonOutline>Pokaż</ButtonOutline>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            </Link>
+          </div>
+          {/* <div className='mb-10 mt-5 flex justify-center'>
+            <Link href='/zaplanuj-podroz' onClick={handlePlanClick}>
+              <ButtonPrimary>Zaplanuj kolejną podróż</ButtonPrimary>
+            </Link>
+          </div> */}
+        </div>
+      </Layout>
     </>
   );
 }
