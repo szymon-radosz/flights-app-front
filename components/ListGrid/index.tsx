@@ -99,7 +99,7 @@ const ListGrid = ({ isHomePage, location }: Props) => {
             id: 10,
             cityFrom: 'Gdańsk',
             cityTo: 'Pisa',
-            img: '/assets/locations/piza.png',
+            img: '/assets/locations/pisa.png',
           },
           {
             id: 11,

@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
         <Alert msg={alert?.msg} type={alert?.type} />
       )}
       {loader && (
-        <div className='absolute left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-[rgba(0,0,0,.5)]'>
+        <div className='fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-[rgba(0,0,0,.5)]'>
           <Image
             src='/assets/loader.gif'
             width={150}

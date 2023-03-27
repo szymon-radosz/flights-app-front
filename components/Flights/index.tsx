@@ -2,13 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setAlert } from '@/store/alert';
 import { selectAuth } from '@/store/auth';
-import { setLoader } from '@/store/loader';
 
-import { postRequest } from './../../utils/api';
-import handleAddFirebaseLog from './../../utils/handleAddFirebaseLog';
-import ButtonPrimary from './../misc/ButtonPrimary';
 import RowOfferSceleton from './../RowOfferSceleton/RowOfferSceleton';
 import SingleFlight from './SingleFlight';
 
@@ -34,69 +29,11 @@ const Flights = ({
   const dispatch = useDispatch();
   const [showSceleton, setShowSceleton] = useState(true);
 
-  const [saved, setSaved] = useState(false);
   useEffect(() => {
     setTimeout(() => {
       setShowSceleton(false);
     }, 1000);
   }, []);
-
-  const callSetLoader = (status: boolean) => {
-    dispatch(setLoader(status));
-  };
-
-  const callSetAlert = (show: boolean, msg: string, type: string) => {
-    dispatch(setAlert({ show: show, msg: msg, type: type }));
-  };
-
-  const handleSaveTravel = async () => {
-    if (!auth?.token) {
-      router.push('/logowanie');
-    } else if (
-      !saved &&
-      dateFrom &&
-      dateTo &&
-      directionFrom &&
-      directionTo &&
-      peopleCount
-    ) {
-      const response: any = await postRequest(
-        'saved-travels/store',
-        {
-          from: directionFrom,
-          to: directionTo,
-          date_from: dateFrom,
-          date_to: dateTo,
-          people_count: peopleCount,
-        },
-        callSetLoader,
-        callSetAlert,
-        {
-          headers: {
-            Authorization: `Bearer ${auth?.token}`,
-          },
-        }
-      );
-
-      console.log([
-        'handleSaveTravel',
-        response,
-        directionFrom,
-        directionTo,
-        dateFrom,
-        dateTo,
-        peopleCount,
-      ]);
-
-      handleAddFirebaseLog('click_element', {
-        location: 'Travel Details',
-        name: 'Save to Favourites',
-        activeUrl: window?.location?.pathname,
-      });
-
-      setSaved(true);
-    }
-  };
 
   return (
     <section className='py-10'>
@@ -104,11 +41,6 @@ const Flights = ({
         <h2 className='text-3xl font-bold leading-normal text-black-600 sm:mb-5 lg:text-3xl xl:text-4xl'>
           Loty
         </h2>
-        <div onClick={handleSaveTravel}>
-          <ButtonPrimary>
-            {saved ? 'Zapisano' : 'Zapisz'} do ulubionych
-          </ButtonPrimary>
-        </div>
       </div>
 
       <>

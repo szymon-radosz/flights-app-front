@@ -31,7 +31,8 @@ export default function Register() {
     dispatch(setAlert({ show: show, msg: msg, type: type }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: any) => {
+    e?.preventDefault();
     if (data?.name && data?.email && data?.password) {
       const response = await postRequest(
         'register',
@@ -198,7 +199,7 @@ export default function Register() {
                             <div className='mb-12 pt-1 pb-1 text-center'>
                               <button
                                 className='mb-3 inline-block w-full rounded bg-green-500 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white-500 shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]'
-                                type='button'
+                                type='submit'
                                 data-te-ripple-init
                                 data-te-ripple-color='light'
                                 onClick={handleSubmit}

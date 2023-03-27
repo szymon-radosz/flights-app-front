@@ -27,7 +27,7 @@ const Alert = ({ msg, type }: Props) => {
     <>
       {showAlert && (
         <div
-          className={`font-white-500 absolute left-0 left-0 right-0 top-[30px] z-50 m-auto w-full max-w-[600px]  `}
+          className={`font-white-500 fixed left-0 left-0 right-0 top-[30px] z-50 m-auto w-full max-w-[600px]  `}
         >
           <div
             className={`ml-5 mr-5 rounded-md ${
