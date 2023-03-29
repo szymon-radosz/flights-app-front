@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRequest } from 'utils/api';
+import { deleteRequest, getRequest } from 'utils/api';
 
 import { selectAuth } from '@/store/auth';
 
@@ -54,11 +54,14 @@ export default function Konto() {
     dispatch(setAlert({ show: show, msg: msg, type: type }));
   };
 
-  const getSavedTravels = async () => {
+  const getSavedTravels = async (
+    ignoreLoader?: boolean,
+    ignoreAlert?: boolean
+  ) => {
     const response: any = await getRequest(
       'saved-travels/list',
-      callSetLoader,
-      callSetAlert,
+      !ignoreLoader && callSetLoader,
+      !ignoreAlert && callSetAlert,
       {
         headers: {
           Authorization: `Bearer ${auth?.token}`,
@@ -66,19 +69,30 @@ export default function Konto() {
       }
     );
 
-    console.log(['response', response?.data]);
+    // console.log(['response', response?.data]);
 
     setSavedRoutes(response?.data);
+  };
 
-    // if (response?.success) {
-    //   dispatch(
-    //     setAuth({
-    //       token: response?.data?.token,
-    //       email: data?.email,
-    //     })
-    //   );
-    //   router.push('/konto');
-    // }
+  const handleRemoveTravel = async (id: number) => {
+    const response: any = await deleteRequest(
+      'saved-travels/remove',
+      {
+        data: { travel_id: id },
+        headers: { Authorization: `Bearer ${auth?.token}` },
+      },
+      callSetLoader,
+      callSetAlert
+    );
+
+    if (response?.success) {
+      // setTimeout(() => {
+      //   getSavedTravels();
+      // }, 1000);
+      getSavedTravels(true, true);
+    }
+
+    // console.log(['response', response]);
   };
 
   return (
@@ -93,10 +107,11 @@ export default function Konto() {
             Podróże
           </h2>
           <div className='mx-auto grid max-w-6xl  grid-cols-1 gap-6 pt-3 pb-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-            {savedRoutes?.length &&
+            {savedRoutes?.length ? (
               savedRoutes?.map(
                 (
                   singleRoute: {
+                    id: number;
                     to: string;
                     from: string;
                     date_from: string;
@@ -106,72 +121,94 @@ export default function Konto() {
                   i
                 ) => {
                   return (
-                    <Link
-                      href={`/kierunki/${singleRoute?.from}/${singleRoute?.to}/${singleRoute?.date_from}/${singleRoute?.date_to}/${singleRoute?.people_count}`}
+                    <article
                       key={i}
-                      onClick={handleTravelClick}
+                      className='bg-white rounded-xl py-3 shadow-lg duration-300 hover:scale-105 hover:transform hover:shadow-xl '
                     >
-                      <article className='bg-white rounded-xl py-3 shadow-lg duration-300 hover:scale-105 hover:transform hover:shadow-xl '>
-                        <a href='#'>
-                          <div className='relative flex items-end overflow-hidden rounded-t-xl'>
-                            <Image
-                              src={`/assets/locations/${singleRoute?.to?.toLowerCase()}.png`}
-                              alt={singleRoute?.to}
-                              // layout='responsive'
-                              width={500}
-                              height={300}
-                              quality={100}
-                            />
-                          </div>
+                      <a href='#'>
+                        <div className='relative flex items-end overflow-hidden rounded-t-xl'>
+                          <Image
+                            src={`/assets/locations/${singleRoute?.to?.toLowerCase()}.png`}
+                            alt={singleRoute?.to}
+                            // layout='responsive'
+                            width={500}
+                            height={300}
+                            quality={100}
+                          />
+                        </div>
 
-                          <div className='mt-1 px-4 pt-4 pb-2.5'>
-                            <h2 className='font-bold'>
-                              {singleRoute?.from}-{singleRoute?.to}
-                            </h2>
-                            <div className='mt-2 flex'>
-                              <div className='mb-1 flex items-center'>
-                                <div className='icon-wrap '>
-                                  <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    width='18'
-                                    height='18'
-                                    viewBox='0 0 24 24'
-                                    fill='#62E699'
-                                  >
-                                    <path d='M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z'></path>
-                                  </svg>
-                                </div>
-                                <p className='mr-2 pl-1 text-xs font-bold leading-normal text-black-100'>
-                                  {`${singleRoute?.date_from} - 
+                        <div className='mt-1 px-4 pt-4 pb-2.5'>
+                          <h2 className='font-bold'>
+                            {singleRoute?.from}-{singleRoute?.to}
+                          </h2>
+                          <div className='mt-2 flex'>
+                            <div className='mb-1 flex items-center'>
+                              <div className='icon-wrap '>
+                                <svg
+                                  xmlns='http://www.w3.org/2000/svg'
+                                  width='18'
+                                  height='18'
+                                  viewBox='0 0 24 24'
+                                  fill='#62E699'
+                                >
+                                  <path d='M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z'></path>
+                                </svg>
+                              </div>
+                              <p className='mr-2 pl-1 text-xs font-bold leading-normal text-black-100'>
+                                {`${singleRoute?.date_from} - 
                                   ${singleRoute?.date_to}`}
-                                </p>
-                              </div>
-
-                              <div className='mb-1 flex items-center'>
-                                <div className='icon-wrap '>
-                                  <img
-                                    src='/assets/people.png'
-                                    width='18'
-                                    height='18'
-                                  />
-                                </div>
-                                <p className='pl-1 text-xs font-bold leading-normal text-black-100'>
-                                  {singleRoute?.people_count}
-                                </p>
-                              </div>
+                              </p>
                             </div>
-                            <div className='mt-3 flex items-end justify-between'>
-                              <div className='bg-blue-500 text-white hover:bg-blue-600 flex items-center rounded-lg py-1.5 duration-100'>
-                                <ButtonOutline>Pokaż</ButtonOutline>
+
+                            <div className='mb-1 flex items-center'>
+                              <div className='icon-wrap '>
+                                <img
+                                  src='/assets/people.png'
+                                  width='18'
+                                  height='18'
+                                />
                               </div>
+                              <p className='pl-1 text-xs font-bold leading-normal text-black-100'>
+                                {singleRoute?.people_count}
+                              </p>
                             </div>
                           </div>
-                        </a>
-                      </article>
-                    </Link>
+                          <div className='mt-3 flex items-center'>
+                            <div
+                              onClick={handleTravelClick}
+                              className='bg-blue-500 text-white hover:bg-blue-600 flex items-center rounded-lg py-1.5 duration-100'
+                            >
+                              <Link
+                                href={`/kierunki/${singleRoute?.from}/${singleRoute?.to}/${singleRoute?.date_from}/${singleRoute?.date_to}/${singleRoute?.people_count}`}
+                                key={i}
+                              >
+                                <ButtonOutline>Pokaż</ButtonOutline>
+                              </Link>
+                            </div>
+                            <button
+                              onClick={() =>
+                                handleRemoveTravel(singleRoute?.id)
+                              }
+                              className='ml-2 min-h-[40px] rounded-l-full rounded-r-full border border-red-500 bg-red-500 py-2 px-2 font-medium capitalize tracking-wide text-green-500 outline-none transition-all hover:shadow-lg sm:px-2 '
+                            >
+                              <img
+                                src='/assets/remove.png'
+                                width='22'
+                                height='22'
+                              />
+                            </button>
+                          </div>
+                        </div>
+                      </a>
+                    </article>
                   );
                 }
-              )}
+              )
+            ) : (
+              <p className='mb-[50vh] text-black-100 sm:mb-[60vh] 2xl:mb-[50vh]'>
+                Brak zapisanych podróży.
+              </p>
+            )}
           </div>
           {/* <div className='mb-10 mt-5 flex justify-center'>
             <Link href='/zaplanuj-podroz' onClick={handlePlanClick}>

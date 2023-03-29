@@ -39,7 +39,9 @@ const Alert = ({ msg, type }: Props) => {
             }`}
           >
             <p className='text-md pl-3 pr-3 pt-2 pb-2 text-center text-white-500'>
-              {msg}
+              {msg === 'Unauthenticated.'
+                ? 'Twoja sesja wygasła. Prosimy o ponowne zalogowanie się.'
+                : msg}
             </p>
           </div>
         </div>
