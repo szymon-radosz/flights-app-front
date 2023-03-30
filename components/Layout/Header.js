@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { selectAuth } from '@/store/auth';
+import { selectAuth, setAuth } from '@/store/auth';
 
 import handleAddFirebaseLog from './../../utils/handleAddFirebaseLog';
 // Import react scroll
@@ -12,7 +13,8 @@ import ButtonOutline from '../misc/ButtonOutline.';
 
 const Header = () => {
   const auth = useSelector(selectAuth);
-  const { asPath } = useRouter();
+  const router = useRouter();
+  const dispatch = useDispatch();
   const [activeLink, setActiveLink] = useState(null);
   const [scrollActive, setScrollActive] = useState(false);
 
@@ -83,6 +85,16 @@ const Header = () => {
     });
   };
 
+  const handleLogout = () => {
+    dispatch(
+      setAuth({
+        token: '',
+        email: '',
+      })
+    );
+    router.push('/logowanie');
+  };
+
   return (
     <>
       <header
@@ -146,9 +158,20 @@ const Header = () => {
           </ul>
           <div className='col-start-10 col-end-12 flex items-center justify-end font-medium'>
             {auth?.email ? (
-              <Link href='/konto' onClick={handleAccountClick}>
-                <p className='mr-3 text-black-100'>Konto</p>
-              </Link>
+              <>
+                <Link href='/konto' onClick={handleAccountClick}>
+                  <p className='mr-3 text-black-100'>Moje konto</p>
+                </Link>
+                <Link href='#' onClick={handleLogout}>
+                  <Image
+                    src='/assets/logout.png'
+                    width={20}
+                    height={20}
+                    className='mr-2'
+                    alt='Logout'
+                  />
+                </Link>
+              </>
             ) : (
               <Link href='/logowanie' onClick={handleLoginClick}>
                 <p className='mr-3 text-black-100'>Logowanie</p>

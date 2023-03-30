@@ -120,13 +120,14 @@ export default function Konto() {
                   },
                   i
                 ) => {
+                  const redirectToTravelRoute = `/kierunki/${singleRoute?.from}/${singleRoute?.to}/${singleRoute?.date_from}/${singleRoute?.date_to}/${singleRoute?.people_count}`;
                   return (
                     <article
                       key={i}
                       className='bg-white rounded-xl py-3 shadow-lg duration-300 hover:scale-105 hover:transform hover:shadow-xl '
                     >
-                      <a href='#'>
-                        <div className='relative flex items-end overflow-hidden rounded-t-xl'>
+                      <div className='relative flex items-end overflow-hidden rounded-t-xl'>
+                        <Link href={redirectToTravelRoute}>
                           <Image
                             src={`/assets/locations/${singleRoute?.to?.toLowerCase()}.png`}
                             alt={singleRoute?.to}
@@ -135,71 +136,66 @@ export default function Konto() {
                             height={300}
                             quality={100}
                           />
-                        </div>
+                        </Link>
+                      </div>
 
-                        <div className='mt-1 px-4 pt-4 pb-2.5'>
-                          <h2 className='font-bold'>
-                            {singleRoute?.from}-{singleRoute?.to}
-                          </h2>
-                          <div className='mt-2 flex'>
-                            <div className='mb-1 flex items-center'>
-                              <div className='icon-wrap '>
-                                <svg
-                                  xmlns='http://www.w3.org/2000/svg'
-                                  width='18'
-                                  height='18'
-                                  viewBox='0 0 24 24'
-                                  fill='#62E699'
-                                >
-                                  <path d='M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z'></path>
-                                </svg>
-                              </div>
-                              <p className='mr-2 pl-1 text-xs font-bold leading-normal text-black-100'>
-                                {`${singleRoute?.date_from} - 
-                                  ${singleRoute?.date_to}`}
-                              </p>
-                            </div>
-
-                            <div className='mb-1 flex items-center'>
-                              <div className='icon-wrap '>
-                                <img
-                                  src='/assets/people.png'
-                                  width='18'
-                                  height='18'
-                                />
-                              </div>
-                              <p className='pl-1 text-xs font-bold leading-normal text-black-100'>
-                                {singleRoute?.people_count}
-                              </p>
-                            </div>
-                          </div>
-                          <div className='mt-3 flex items-center'>
-                            <div
-                              onClick={handleTravelClick}
-                              className='bg-blue-500 text-white hover:bg-blue-600 flex items-center rounded-lg py-1.5 duration-100'
-                            >
-                              <Link
-                                href={`/kierunki/${singleRoute?.from}/${singleRoute?.to}/${singleRoute?.date_from}/${singleRoute?.date_to}/${singleRoute?.people_count}`}
-                                key={i}
+                      <div className='mt-1 px-4 pt-4 pb-2.5'>
+                        <h2 className='font-bold'>
+                          {singleRoute?.from}-{singleRoute?.to}
+                        </h2>
+                        <div className='mt-2 flex'>
+                          <div className='mb-1 flex items-center'>
+                            <div className='icon-wrap '>
+                              <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='18'
+                                height='18'
+                                viewBox='0 0 24 24'
+                                fill='#62E699'
                               >
-                                <ButtonOutline>Pokaż</ButtonOutline>
-                              </Link>
+                                <path d='M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z'></path>
+                              </svg>
                             </div>
-                            <button
-                              onClick={() =>
-                                handleRemoveTravel(singleRoute?.id)
-                              }
-                              className='ml-2 min-h-[40px] rounded-l-full rounded-r-full border border-red-500 bg-red-500 py-2 px-2 font-medium capitalize tracking-wide text-green-500 outline-none transition-all hover:shadow-lg sm:px-2 '
-                            >
+                            <p className='mr-2 pl-1 text-xs font-bold leading-normal text-black-100'>
+                              {`${singleRoute?.date_from} - 
+                                  ${singleRoute?.date_to}`}
+                            </p>
+                          </div>
+
+                          <div className='mb-1 flex items-center'>
+                            <div className='icon-wrap '>
                               <img
-                                src='/assets/remove.png'
-                                width='22'
-                                height='22'
+                                src='/assets/people.png'
+                                width='18'
+                                height='18'
                               />
-                            </button>
+                            </div>
+                            <p className='pl-1 text-xs font-bold leading-normal text-black-100'>
+                              {singleRoute?.people_count}
+                            </p>
                           </div>
                         </div>
-                      </a>
+                        <div className='mt-3 flex items-center'>
+                          <div
+                            onClick={handleTravelClick}
+                            className='bg-blue-500 text-white hover:bg-blue-600 flex items-center rounded-lg py-1.5 duration-100'
+                          >
+                            <Link href={redirectToTravelRoute}>
+                              <ButtonOutline>Pokaż</ButtonOutline>
+                            </Link>
+                          </div>
+                          <button
+                            onClick={() => handleRemoveTravel(singleRoute?.id)}
+                            className='ml-2 min-h-[40px] rounded-l-full rounded-r-full border border-red-500 bg-red-500 py-2 px-2 font-medium capitalize tracking-wide text-green-500 outline-none transition-all hover:shadow-lg sm:px-2 '
+                          >
+                            <img
+                              src='/assets/remove.png'
+                              width='22'
+                              height='22'
+                            />
+                          </button>
+                        </div>
+                      </div>
                     </article>
                   );
                 }
