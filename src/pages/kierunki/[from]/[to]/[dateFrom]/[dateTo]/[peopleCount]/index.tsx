@@ -15,6 +15,7 @@ import { setAlert } from '@/store/alert';
 import { selectAuth } from '@/store/auth';
 import { setLoader } from '@/store/loader';
 
+import TravelPlan from './../../../../../../../../components/TravelPlan/index';
 import ButtonPrimary from '../../../../../../../../components/misc/ButtonPrimary';
 import { postRequest } from '../../../../../../../../utils/api';
 import getScrollAnimation from '../../../../../../../../utils/getScrollAnimation';
@@ -186,6 +187,12 @@ export default function DirectionsSearchPage() {
             peopleCount={peopleCount}
           />
           <Accomodation
+            directionTo={routerState?.to}
+            dateFrom={routerState?.dateFrom}
+            dateTo={routerState?.dateTo}
+            peopleCount={routerState?.peopleCount}
+          />
+          <TravelPlan
             directionTo={routerState?.to}
             dateFrom={routerState?.dateFrom}
             dateTo={routerState?.dateTo}
