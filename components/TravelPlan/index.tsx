@@ -1,14 +1,19 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import 'react-input-range/lib/css/index.css';
 
+import { selectAuth } from '@/store/auth';
+
+import handleAddFirebaseLog from './../../utils/handleAddFirebaseLog';
 import ButtonPrimary from '../../components/misc/ButtonPrimary';
 
 interface TravelPlanProps {
-  directionTo?: string;
-  dateFrom?: string;
-  dateTo?: string;
-  peopleCount?: number;
+  directionTo: string;
+  dateFrom: string;
+  dateTo: string;
+  peopleCount: number;
 }
 
 const TravelPlan = ({
@@ -17,6 +22,8 @@ const TravelPlan = ({
   dateTo,
   peopleCount,
 }: TravelPlanProps) => {
+  const auth = useSelector(selectAuth);
+  const router = useRouter();
   const [showSceleton, setShowSceleton] = useState(true);
 
   const [travelExpensiveness, setTravelExpensiveness] = useState({
@@ -183,13 +190,62 @@ const TravelPlan = ({
   }, []);
 
   const handleGenerateTravel = () => {
-    console.log(['handleGenerateTravel']);
+    handleAddFirebaseLog('click_element', {
+      name: 'Travel Plan Submit',
+      activeUrl: window?.location?.pathname,
+    });
+
+    if (!auth?.token) {
+      router.push('/logowanie');
+    } else {
+      const diff = Math.floor(
+        (Date.parse(dateTo) - Date.parse(dateFrom)) / 86400000
+      );
+
+      const selectedTravelExpensiveness = travelExpensiveness?.options?.find(
+        (obj) => obj?.selected
+      );
+
+      const selectedTravelPace = travelPace?.options?.find(
+        (obj) => obj?.selected
+      );
+
+      const selectedTravelActivities = travelActivities?.options?.filter(
+        (obj) => obj?.selected === true
+      );
+
+      const prompt = `Planuje podróż do miejscowości ${directionTo}, spędzę tam ${diff} dni. Wygeneruj dla mnie plan podróży z podziałem na poszczególne dni wiedząc, że budżet na tą podróż jest ${
+        selectedTravelExpensiveness?.id === 1
+          ? 'bardzo wysoki'
+          : selectedTravelExpensiveness?.id === 2
+          ? 'przeciętny'
+          : 'bardzo niski'
+      }. Uwzględnij, że planuję ${
+        selectedTravelPace?.id === 1
+          ? 'zwiedzać bardzo dużo atrakcji w ciągu dnia'
+          : selectedTravelPace?.id === 2
+          ? 'zwiedzanie w spokojnym tempie'
+          : 'nie odwiedzać popularnych atrakcji turystycznych'
+      } ${
+        selectedTravelActivities?.length
+          ? `i interesujące mnie aktywności to ${selectedTravelActivities?.map(
+              (singleActivity, i) =>
+                selectedTravelActivities.length === i + 1
+                  ? ` ${singleActivity?.pl}.`
+                  : ` ${singleActivity?.pl}`
+            )}`
+          : '.'
+      }`;
+
+      // console.log(['handleGenerateTravel', diff, prompt]);
+    }
   };
 
-  const questionStyles = 'text-lg font-bold text-black-500';
+  const questionStyles =
+    'text-md sm:text-lg font-bold text-black-500 mb-2 mt-2';
   const optionContainerStyles =
-    'border-1 border-gray-100 mr-2 rounded-md px-4 py-1';
-  const optionContainerTextStyles = '';
+    'border-1 border-gray-100 mr-2 rounded-md px-4 py-1 mb-2';
+  const optionContainerTextStyles = 'text-sm sm:text-md text-left';
 
   return (
     <section className='pt-2 pb-10'>
@@ -269,7 +325,7 @@ const TravelPlan = ({
         </div>
       </div>
 
-      <div onClick={handleGenerateTravel} className='mb-2 mt-5 sm:mb-0'>
+      <div onClick={handleGenerateTravel} className='mb-2 mt-5 sm:mb-5'>
         <ButtonPrimary>Wygeneruj plan</ButtonPrimary>
       </div>
     </section>

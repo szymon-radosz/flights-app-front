@@ -70,12 +70,12 @@ export default function Login() {
       <Layout>
         <div className='mx-auto mt-28 max-w-screen-xl py-12 px-0 pt-5 sm:px-6 xl:px-16'>
           <section className='gradient-form bg-neutral-200 dark:bg-neutral-700 h-full'>
-            <div className='container h-full py-5 px-4 sm:px-10 sm:py-10'>
+            <div className='container h-full px-4 sm:py-5 sm:px-10 sm:py-10'>
               <div className='g-6 text-neutral-800 dark:text-neutral-200 flex h-full flex-wrap items-center justify-center'>
                 <div className='w-full'>
-                  <div className='bg-white dark:bg-neutral-800 block rounded-lg shadow-lg'>
+                  <div className='bg-white dark:bg-neutral-800 block rounded-lg sm:shadow-lg'>
                     <div className='g-0 lg:flex lg:flex-wrap'>
-                      <div className='px-4 md:px-0 lg:w-6/12'>
+                      <div className='md:px-0 lg:w-6/12'>
                         <div className='md:mx-6 md:p-12'>
                           <div className='text-center'></div>
                           <form>
@@ -125,7 +125,7 @@ export default function Login() {
                                 Hasło
                               </label>
                             </div>
-                            <div className='mb-12 pt-1 pb-1 text-center'>
+                            <div className='mb-3 pt-1 pb-1 text-center sm:mb-12'>
                               <button
                                 className='mb-3 inline-block w-full rounded bg-green-500 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white-500 shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]'
                                 type='submit'
