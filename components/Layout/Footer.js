@@ -42,9 +42,25 @@ const Footer = () => {
       </div>
       <div className='flex justify-center sm:block'>
         <div className='mx-auto w-auto max-w-screen-xl items-end justify-between px-8 sm:flex sm:w-full sm:px-10 lg:px-16'>
-          <p className='mb-3 text-gray-400 sm:mb-0'>
-            © {new Date().getFullYear()} - ostatnibilet.pl
-          </p>
+          <div className='block sm:flex'>
+            <p className='mb-3 text-center text-gray-400 sm:mb-0 sm:text-left'>
+              © {new Date().getFullYear()} - ostatnibilet.pl
+            </p>
+            <a
+              target='_blank'
+              href='https://www.buymeacoffee.com/radoszszymQ'
+              rel='noopener noreferrer'
+              title='Wesprzyj rozwój platformy'
+            >
+              <p className='mb-3 text-center text-gray-400 sm:mb-0 sm:text-left'>
+                <span className='hidden sm:mr-1 sm:ml-1 sm:inline-block'>
+                  &#8226;
+                </span>
+                <span className='underline'>Wesprzyj rozwój platformy</span>
+              </p>
+            </a>
+          </div>
+
           <div className='flex justify-center sm:justify-end'>
             <div className='mx-2 flex items-center justify-center rounded-full bg-white-500 p-2 shadow-md'>
               <a
