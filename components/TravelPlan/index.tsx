@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import 'react-input-range/lib/css/index.css';
 
@@ -8,9 +8,13 @@ import { selectAuth } from '@/store/auth';
 
 import handleAddFirebaseLog from './../../utils/handleAddFirebaseLog';
 import ButtonPrimary from '../../components/misc/ButtonPrimary';
+import { setAlert } from '../../src/store/alert';
+import { setLoader } from '../../src/store/loader';
+import { postRequest } from '../../utils/api';
 
 interface TravelPlanProps {
   directionTo: string;
+  directionFrom: string;
   dateFrom: string;
   dateTo: string;
   peopleCount: number;
@@ -18,10 +22,12 @@ interface TravelPlanProps {
 
 const TravelPlan = ({
   directionTo,
+  directionFrom,
   dateFrom,
   dateTo,
   peopleCount,
 }: TravelPlanProps) => {
+  const dispatch = useDispatch();
   const auth = useSelector(selectAuth);
   const router = useRouter();
   const [showSceleton, setShowSceleton] = useState(true);
@@ -189,7 +195,15 @@ const TravelPlan = ({
     }, 1000);
   }, []);
 
-  const handleGenerateTravel = () => {
+  const callSetLoader = (status: boolean) => {
+    dispatch(setLoader(status));
+  };
+
+  const callSetAlert = (show: boolean, msg: string, type: string) => {
+    dispatch(setAlert({ show: show, msg: msg, type: type }));
+  };
+
+  const handleGenerateTravel = async () => {
     handleAddFirebaseLog('click_element', {
       name: 'Travel Plan Submit',
       activeUrl: window?.location?.pathname,
@@ -228,16 +242,87 @@ const TravelPlan = ({
           : 'nie odwiedzać popularnych atrakcji turystycznych'
       } ${
         selectedTravelActivities?.length
-          ? `i interesujące mnie aktywności to ${selectedTravelActivities?.map(
+          ? `i interesujące mnie aktywności to${selectedTravelActivities?.map(
               (singleActivity, i) =>
                 selectedTravelActivities.length === i + 1
-                  ? ` ${singleActivity?.pl}.`
-                  : ` ${singleActivity?.pl}`
+                  ? ` ${singleActivity?.pl?.toLocaleLowerCase()}.`
+                  : ` ${singleActivity?.pl?.toLocaleLowerCase()}`
             )}`
           : '.'
       }`;
 
-      // console.log(['handleGenerateTravel', diff, prompt]);
+      const userRequestPrompt = `Podróż do miejscowości ${directionTo}, spędzę tam ${diff} dni. Jak kosztowna ma być to podróż? ${
+        selectedTravelExpensiveness?.pl
+      }. Jak dużo chcesz zwiedzać? ${selectedTravelPace?.pl}. ${
+        selectedTravelActivities?.length
+          ? `Wybierz interesujące Ciebie aktywności -${selectedTravelActivities?.map(
+              (singleActivity, i) =>
+                selectedTravelActivities.length === i + 1
+                  ? ` ${singleActivity?.pl?.toLocaleLowerCase()}.`
+                  : ` ${singleActivity?.pl?.toLocaleLowerCase()}`
+            )}`
+          : ''
+      }`;
+
+      // console.log(['handleGenerateTravel', diff, prompt, userRequestPrompt]);
+
+      // console.log(['handleGenerateTravel', prompt, userRequestPrompt]);
+
+      if (
+        directionFrom &&
+        directionTo &&
+        dateFrom &&
+        dateTo &&
+        peopleCount &&
+        prompt &&
+        userRequestPrompt &&
+        selectedTravelExpensiveness?.pl &&
+        selectedTravelPace?.pl
+      ) {
+        const response: any = await postRequest(
+          'travel-plans/store',
+          {
+            from: directionFrom,
+            to: directionTo,
+            date_from: dateFrom,
+            date_to: dateTo,
+            people_count: peopleCount,
+            user_request_prompt: userRequestPrompt,
+            ai_prompt: prompt,
+            expensiveness: selectedTravelExpensiveness?.pl,
+            pace: selectedTravelPace?.pl,
+            activities: `${selectedTravelActivities?.map(
+              (singleActivity, i) =>
+                ` ${singleActivity?.pl?.toLocaleLowerCase()}`
+            )}`,
+          },
+          callSetLoader,
+          callSetAlert,
+          {
+            headers: {
+              Authorization: `Bearer ${auth?.token}`,
+            },
+          }
+        );
+
+        // console.log([
+        //   'handleSaveTravel',
+        //   response,
+        //   from,
+        //   to,
+        //   dateFrom,
+        //   dateTo,
+        //   peopleCount,
+        // ]);
+
+        handleAddFirebaseLog('click_element', {
+          location: 'Travel Details',
+          name: 'Save Travel Plan',
+          activeUrl: window?.location?.pathname,
+        });
+
+        // setSaved(true);
+      }
     }
   };
 

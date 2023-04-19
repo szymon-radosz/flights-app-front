@@ -194,6 +194,7 @@ export default function DirectionsSearchPage() {
           />
           <TravelPlan
             directionTo={routerState?.to}
+            directionFrom={routerState?.from}
             dateFrom={routerState?.dateFrom}
             dateTo={routerState?.dateTo}
             peopleCount={routerState?.peopleCount}
