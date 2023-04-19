@@ -252,9 +252,8 @@ export default function Konto() {
                 }
               )
             ) : (
-              <p className='mb-[50vh] text-black-100 sm:mb-[60vh] 2xl:mb-[50vh]'>
-                Brak zapisanych podróży.
-              </p>
+              // <p className='mb-[50vh] text-black-100 sm:mb-[60vh] 2xl:mb-[50vh]'>
+              <p className=' text-black-100'>Brak zapisanych podróży.</p>
             )}
           </div>
           {/* <div className='mb-10 mt-5 flex justify-center'>
@@ -264,7 +263,7 @@ export default function Konto() {
           </div> */}
         </div>
 
-        <div className='mx-auto mt-20 max-w-screen-xl px-6 pt-20 xl:px-16'>
+        <div className='mx-auto max-w-screen-xl px-6 pt-20 xl:px-16'>
           <h3 className='font-bold uppercase text-black-500'>
             Wygenerowane przez Ciebie
           </h3>
@@ -412,7 +411,7 @@ export default function Konto() {
                 }
               )
             ) : (
-              <p className='mb-[50vh] text-black-100 sm:mb-[60vh] 2xl:mb-[50vh]'>
+              <p className='mb-[10vh] text-black-100 sm:mb-[20vh] 2xl:mb-[40vh]'>
                 Brak zapisanych planów podróży.
               </p>
             )}
