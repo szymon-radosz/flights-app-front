@@ -2,7 +2,11 @@
 
 I created repo to try them out
 
-## Preview
+## Live Preview
+
+[a link](https://flights-app.radosz.dev)
+
+## Screenshots
 
 ![Screenshot](desktop1.png)
 ![Screenshot](desktop2.png)
