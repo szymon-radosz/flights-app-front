@@ -4,7 +4,7 @@ I created repo to try them out
 
 ## Live Preview
 
-[a link](https://flights-app.radosz.dev)
+[flights-app.radosz.dev](https://flights-app.radosz.dev)
 
 ## Screenshots
 
