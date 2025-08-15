@@ -10,10 +10,9 @@ jest.mock('firebase/analytics', () => ({
 
 jest.mock('next/router', () => ({
   useRouter: () => ({
-    pathname: '/404',
-    push: jest.fn(),
-    replace: jest.fn(),
+    route: '/',
+    pathname: '/',
     query: {},
-    asPath: '/404',
+    asPath: '/',
   }),
 }));
